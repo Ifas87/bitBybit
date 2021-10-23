@@ -1,0 +1,260 @@
+/*
+  Desktop size: landscape
+*/
+#show_bg_2 {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0px;
+  top: 0px;
+
+  z-index: 2;
+  background: linear-gradient(107.36deg, #EFEFEF 55.4%, rgba(239, 239, 239, 0) 82.88%);
+}
+
+.title {
+  width: 947px;
+  color: rgb(99, 95, 95);;
+  position: absolute;
+  top: 32%;
+  left: 7%;
+  font-family: Montserrat;
+  font-weight: Bold;
+  font-size: 125px;
+  opacity: 1;
+  text-align: left;
+  
+  z-index: 3;
+}
+
+.subtitle {
+  width: 873px;
+  color: rgb(99, 95, 95);;
+  position: absolute;
+  top: 52%;
+  left: 7%;
+  font-family: Montserrat;
+  font-weight: 600;
+  font-size: 36px;
+  opacity: 1;
+  text-align: left;
+
+  z-index: 3;
+}
+
+.redirect {
+  height: 50px;
+  width: 175px;
+  color: rgba(239,239,239,1);
+  position: absolute;
+  top: 70%;
+  left: 8%;
+  font-family: Montserrat;
+  font-weight: 600;
+  font-size: 30px;
+  text-align: center;
+  color: rgb(99, 95, 95);;
+  border-radius: 50px;
+
+  border: 5px;
+  border-color: #efefef;
+  z-index: 3;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+}
+
+.redirect:hover {
+  content: "";
+  background: rgba(239,239,239,1);
+  color:#908A8A;
+  border-color: #908A8A;
+  transition: all 0.8s
+}
+
+.redirect:after {
+  content: "";
+  background: #908A8A;
+  color: rgba(239,239,239,1);
+  border-color: #efefef;
+}
+
+.hex_background {
+  width: 100%;
+  height: 100%;
+  background: url("../images/v1169_237.png");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  opacity: 1;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  overflow: hidden;
+  z-index: 1;
+}
+
+* {
+  box-sizing: border-box;
+}
+body {
+  font-size: 14px;
+}
+
+/*
+  Tablet size: portrait
+*/
+@media only screen and (max-width:1024px) and (min-width:600px) {
+  #show_bg_2 {
+    background:#efefefd2;
+  }
+
+  .title {
+    color: rgb(99, 95, 95);
+    position: absolute;
+    top: 547px;
+    left: 220.5px;
+  }
+
+  .subtitle {
+    color: rgb(99, 95, 95);
+    position: absolute;
+    top: 700px;
+    left: 210.5px;
+  }
+
+  .redirect {
+    position: absolute;
+    top: 850px;
+    left: 400.5px;
+  }
+
+  .redirect:hover {
+    content: "";
+    background: rgba(239,239,239,1);
+    color:#908A8A;
+    border-color: #908A8A;
+    transition: all 0.8s
+  }
+}
+
+/*
+  Tablet size: Landscape
+*/
+@media only screen and (max-width:1366px) and (min-width:1024px){
+  #show_bg_2 {
+    background:#efefefd2;
+  }
+
+  .title {
+    color: rgb(99, 95, 95);
+    position: absolute;
+    top: 350px;
+    left: 400.5px;
+  }
+
+  .subtitle {
+    color: rgb(99, 95, 95);
+    position: absolute;
+    top: 530px;
+    left: 400.5px;
+  }
+
+  .redirect {
+    position: absolute;
+    top: 680px;
+    left: 585.5px;
+  }
+
+  .redirect:hover {
+    content: "";
+    background: rgba(239,239,239,1);
+    color:#908A8A;
+    border-color: #908A8A;
+    transition: all 0.8s
+  }
+}
+
+/*
+  Modern Ipad: portrait
+*/
+@media only screen and (max-width:800px){
+  #show_bg_2 {
+    background:#efefefd2;
+  }
+
+  .title {
+    color: rgb(99, 95, 95);
+    position: absolute;
+    top: 35%;
+    left: 15%;
+  }
+
+  .subtitle {
+    color: rgb(99, 95, 95);
+    position: absolute;
+    top: 52%;
+    left: 10%;
+    width:80%;
+    font-weight: bold;
+    overflow-wrap: break-word;
+    text-align: center;
+  }
+
+  .redirect {
+    position: absolute;
+    top: 65%;
+    left: 37%;
+  }
+
+  .redirect:hover {
+    content: "";
+    background: rgba(239,239,239,1);
+    color:#908A8A;
+    border-color: #908A8A;
+    transition: all 0.8s
+  }
+}
+
+
+/*
+  Modern mobile size 18:9: portrait
+*/
+@media only screen and (max-width:600px){
+  #show_bg_2 {
+    background:#efefefd2;
+  }
+
+  .title {
+    color: rgb(99, 95, 95);
+    position: absolute;
+    top: 38%;
+    left: 5%;
+    font-size: 80px;
+  }
+
+  .subtitle {
+    color: rgb(99, 95, 95);
+    position: absolute;
+    top: 52%;
+    left: 10%;
+    width:80%;
+    font-size: 24px;
+    font-weight: bold;
+    overflow-wrap: break-word;
+    text-align: center;
+  }
+
+  .redirect {
+    position: absolute;
+    top: 70%;
+    left: 27%;
+  }
+
+  .redirect:hover {
+    content: "";
+    background: rgba(239,239,239,1);
+    color:#908A8A;
+    border-color: #908A8A;
+    transition: all 0.8s
+  }
+}
