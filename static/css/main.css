@@ -24,6 +24,7 @@
   opacity: 1;
   text-align: left;
   
+  transition-duration: 0.4s;
   z-index: 3;
 }
 
@@ -38,7 +39,8 @@
   font-size: 36px;
   opacity: 1;
   text-align: left;
-
+  
+  transition-duration: 0.4s;
   z-index: 3;
 }
 
@@ -102,46 +104,9 @@ body {
 }
 
 /*
-  Tablet size: portrait
-*/
-@media only screen and (max-width:1024px) and (min-width:600px) {
-  #show_bg_2 {
-    background:#efefefd2;
-  }
-
-  .title {
-    color: rgb(99, 95, 95);
-    position: absolute;
-    top: 547px;
-    left: 220.5px;
-  }
-
-  .subtitle {
-    color: rgb(99, 95, 95);
-    position: absolute;
-    top: 700px;
-    left: 210.5px;
-  }
-
-  .redirect {
-    position: absolute;
-    top: 850px;
-    left: 400.5px;
-  }
-
-  .redirect:hover {
-    content: "";
-    background: rgba(239,239,239,1);
-    color:#908A8A;
-    border-color: #908A8A;
-    transition: all 0.8s
-  }
-}
-
-/*
   Tablet size: Landscape
 */
-@media only screen and (max-width:1366px) and (min-width:1024px){
+@media only screen and (max-width:1366px){
   #show_bg_2 {
     background:#efefefd2;
   }
@@ -149,21 +114,23 @@ body {
   .title {
     color: rgb(99, 95, 95);
     position: absolute;
-    top: 350px;
-    left: 400.5px;
+    top: 190px;
+    left: 270px;
+    font-size: 110px;
   }
 
   .subtitle {
     color: rgb(99, 95, 95);
     position: absolute;
-    top: 530px;
-    left: 400.5px;
+    top: 360px;
+    left: 205px;
+    font-weight: bold;
   }
 
   .redirect {
     position: absolute;
-    top: 680px;
-    left: 585.5px;
+    top: 450px;
+    left: 435px;
   }
 
   .redirect:hover {
@@ -186,14 +153,15 @@ body {
   .title {
     color: rgb(99, 95, 95);
     position: absolute;
-    top: 35%;
-    left: 15%;
+    top: 205px;
+    left: 22%;
+    font-size: 100px;
   }
 
   .subtitle {
     color: rgb(99, 95, 95);
     position: absolute;
-    top: 52%;
+    top: 345px;
     left: 10%;
     width:80%;
     font-weight: bold;
@@ -203,7 +171,7 @@ body {
 
   .redirect {
     position: absolute;
-    top: 65%;
+    top: 445px;
     left: 37%;
   }
 
@@ -218,9 +186,9 @@ body {
 
 
 /*
-  Modern mobile size 18:9: portrait
+  Modern mobile size older 16:9: portrait
 */
-@media only screen and (max-width:600px){
+@media only screen and (max-width:400px){
   #show_bg_2 {
     background:#efefefd2;
   }
@@ -228,15 +196,15 @@ body {
   .title {
     color: rgb(99, 95, 95);
     position: absolute;
-    top: 38%;
-    left: 5%;
+    top: 200px;
+    left: 2%;
     font-size: 80px;
   }
 
   .subtitle {
     color: rgb(99, 95, 95);
     position: absolute;
-    top: 52%;
+    top: 325px;
     left: 10%;
     width:80%;
     font-size: 24px;
@@ -248,6 +216,47 @@ body {
   .redirect {
     position: absolute;
     top: 70%;
+    left: 27%;
+  }
+
+  .redirect:hover {
+    content: "";
+    background: rgba(239,239,239,1);
+    color:#908A8A;
+    border-color: #908A8A;
+    transition: all 0.8s
+  }
+}
+
+
+@media only screen and (max-width:550px) and (max-height:900px){
+  #show_bg_2 {
+    background:#efefefd2;
+  }
+
+  .title {
+    color: rgb(99, 95, 95);
+    position: absolute;
+    top: 200px;
+    left: 5%;
+    font-size: 80px;
+  }
+
+  .subtitle {
+    color: rgb(99, 95, 95);
+    position: absolute;
+    top: 325px;
+    left: 10%;
+    width:80%;
+    font-size: 24px;
+    font-weight: bold;
+    overflow-wrap: break-word;
+    text-align: center;
+  }
+
+  .redirect {
+    position: absolute;
+    top:  475px;
     left: 27%;
   }
 
