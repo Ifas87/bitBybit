@@ -8,31 +8,57 @@
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;600;700&display=swap" rel="stylesheet">
     <link href="{{ url_for('static', filename='css/upload.css') }}" rel="stylesheet" />
+    <link href="upload.css" rel="stylesheet" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dropzone/5.7.1/min/dropzone.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     
-    {{ dropzone.load() }}
-    {{ dropzone.style('border: 5px dashed rgb(124, 121, 121); min-height: 400px;') }}
+    <script type="text/javascript">
+      Dropzone.options.myDropzone = {
+
+        autoProcessQueue: false,
+        uploadMultiple: true,
+        parallelUploads: 10,
+        maxFiles: 10,
+        timeout: 2700000,
+        init: function() {
+          myDropzone = this; // closure
+
+          this.element.querySelector("button[type=submit]").addEventListener("click", function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            myDropzone.processQueue();
+          });
+
+        }
+      };
+    </script>
+
+    <style>
+      
+
+    </style>
   </head>
           
   <body>
     <main>
       <div class="title"> bitBybit </div>
-      <form enctype=multipart/form-data method="post" action="http://192.168.100.113:5000/uploader" id="mainform">
-        <label for="files" class="labels">File upload</label>
-        {{ dropzone.create(action='upload') }}
-        {{ dropzone.load_js() }}
-        {{ dropzone.config() }}
-
-        <label for="message" class="labels">Accompanying message</label>
+      <form enctype=multipart/form-data method="post" action="/uploader" id="mainform" class="dropzone">
+        <label for="files" class="labels fu">File upload</label>
+        
+        <label for="message" class="labels am">Accompanying message</label>
         <textarea name="message" form="mainform" class="textareas"></textarea>
 
-        <label for="links" class="labels">Link name: </label>
-        <input name="links" class="textboxes" type="text" data-max-words="1">
+        <label for="links" class="labels ln">Link name: </label>
+        <input name="links" class="textboxes textln" type="text" data-max-words="1" placeholder="eg: sub">
 
-        <label for="passcodes" class="labels">Security pin: </label>
-        <input name="passcodes" class="textboxes" type="text" data-max-words="1">
+        <label for="passcodes" class="labels sp">Security pin: </label>
+        <input name="passcodes" class="textboxes textsp" type="text" data-max-words="1" placeholder="eg: 123">
 
-        <label for="TTL" class="labels">Link Active time: </label>
-        <select name="TTL" class="dropdown">
+        <label for="TTL" class="labels lat">Link Active time: </label>
+        <select name="TTL" class="dropdown textlat">
           <option value="0">Delete Immediately</option>
           <option value="1">After 1 hour</option>
           <option value="2">After 2 hours</option>
@@ -41,35 +67,9 @@
           <option value="5">Indefinitely</option>
         </select>
         
-        <input name="submit" class="control" type="reset"> Reset
-        <input name="submit" class="control" type="submit"> Submit
+        <input name="reset" class="control a1" type="reset" value="reset">
+        <input name="submit" class="control a2" type="submit" value="submit">
       </form>
     </main>
-
-    <!--
-    <div class=e1163_40>
-      <div  class="e1170_3"></div>
-      <div  class="e1170_8"></div>
-      <div  class="e1170_12"></div>
-      <div  class="e1174_2"></div>
-      <span  class="e1166_43">bitBybit</span>
-      <div class=e1169_64>
-        <div  class="e1167_46"></div>
-        <span  class="e1168_47">Submit</span>
-      </div>
-      <span  class="e1169_235">File Upload</span>
-      <span  class="e1170_10">Link:</span>
-      <span  class="e1170_7">Accompanying message (optional)</span>
-      <span  class="e1170_9">Type Message here</span>
-      <span  class="e1170_11">Type Message here</span>
-      <div  class="e1170_13"></div>
-      <span  class="e1170_14">Security Pin:</span>
-      <span  class="e1174_5">Delete link after: </span>
-      <span  class="e1170_15">Type Message here</span>
-      <span  class="e1174_3">Immediately</span>
-      <span  class="e1170_4">Select or Drag file here.</span>
-      <div  class="e1170_6"></div><div  class="e1174_4"></div>
-    </div>
-    -->
   </body>
 </html>
