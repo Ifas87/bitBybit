@@ -40,6 +40,13 @@ def download_manager():
     tar.close()
     return redirect(url_for('hello'))
 
+@app.route('/uploader2', methods = ['GET', 'POST'])
+def upload_file():
+   if request.method == 'POST':
+      f = request.files['file']
+      f.save(secure_filename(f.filename))
+      return 'file uploaded successfully'
+
 
 @app.route('/')
 def hello():
