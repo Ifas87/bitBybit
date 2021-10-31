@@ -7,20 +7,19 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;600;700&display=swap" rel="stylesheet">
-    <link href="{{ url_for('static', filename='css/upload.css') }}" rel="stylesheet" />
-    <link href="upload.css" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/create.css') }}" rel="stylesheet" />
+    <link href="../static/css/create.css" rel="stylesheet" type="text/css">
 
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
   </head>
           
   <body>
     <main>
-      <div class="title"> bitBybit </div>
-      <form enctype=multipart/form-data method="post" action="/uploader2" id="mainform" class="dropzone">
-        <label for="files" class="labels fu">File upload</label>
+      <div class="hex_background"> </div>
+      <div class="foreground">
+        <div class="title"> bitBybit </div>
+        <form enctype=multipart/form-data method="post" action="{{ url_for('select') }}" id="mainform" class="dropzone">
         
-        <label for="message" class="labels am">Accompanying message</label>
-        <textarea name="message" form="mainform" class="textareas"></textarea>
-
         <label for="links" class="labels ln">Link name: </label>
         <input name="links" class="textboxes textln" type="text" data-max-words="1" placeholder="eg: sub">
 
@@ -30,6 +29,7 @@
         <label for="TTL" class="labels lat">Link Active time: </label>
         <select name="TTL" class="dropdown textlat">
           <option value="0">Delete Immediately</option>
+          <option value="0">After 1/2 an hour</option>
           <option value="1">After 1 hour</option>
           <option value="2">After 2 hours</option>
           <option value="3">After 4 hours</option>
@@ -40,6 +40,7 @@
         <input name="reset" class="control a1" type="reset" value="reset">
         <input name="submit" class="control a2" type="submit" value="submit">
       </form>
+      </div>
     </main>
   </body>
 </html>

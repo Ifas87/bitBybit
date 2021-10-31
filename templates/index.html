@@ -13,9 +13,12 @@
 
 	<body>
 		<main>
+			<form action="{{ url_for('create') }}">
+				<input name="submit" class="redirect" type="submit" value="Start">
+			</form>
 			<span class="title">bitBybit</span>
 			<span class="subtitle">A Secure File Sharing platform</span>
-			<button class="redirect">Start</button>
+			<!-- <button class="redirect">Start</button> -->
 			<div class="hex_background"></div>
 			<div id='show_bg_2'></div>
 		</main>

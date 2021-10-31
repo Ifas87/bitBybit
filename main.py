@@ -17,35 +17,22 @@ app.config.update(
 
 dropzone = Dropzone(app)
 
-@app.route('/upload',methods=['POST','GET'])
-def upload():
-    if request.method == 'POST':
-        f = request.files.get('file')
-        f.save(os.path.join(app.config['UPLOADED_PATH'],f.filename))
-    return render_template('upload.html', template_folder='templates')
+# Placeholder link
+@app.route('/chat',methods=['POST','GET'])
+def chat():
+    return "Hello chat"
 
-@app.route('/uploader',methods=['POST','GET'])
-def download_manager():
-    my_files = request.files
-    current_time = datetime.now()
-    temp_filename = "file_"+current_time.strftime("%m_%d_%Y_%H_%M_%S_%f")+"_package.tar.gz"
 
-    tar = tarfile.open("uploads/"+temp_filename, mode="w:gz")
-    for item in my_files:
-        uploaded_file = my_files.get(item)
-        tarlocation = os.path.join(app.config['UPLOADED_PATH']+"/temp", item.filename)
-        item.save(tarlocation)
-        tar.add(tarlocation)
-    
-    tar.close()
-    return redirect(url_for('hello'))
+@app.route('/create',methods=['POST','GET'])
+def create():
+    #if passcode is available in files then redirect to the
+    #confirm page while sending the chat name and password to confirm
+    return render_template('create.html', template_folder='templates')
 
-@app.route('/uploader2', methods = ['GET', 'POST'])
-def upload_file():
-   if request.method == 'POST':
-      f = request.files['file']
-      f.save(secure_filename(f.filename))
-      return 'file uploaded successfully'
+
+@app.route('/select',methods=['POST','GET'])
+def select():
+    return render_template('select.html', template_folder='templates')
 
 
 @app.route('/')
@@ -54,3 +41,4 @@ def hello():
 
 if __name__=='__main__':
     app.run()
+
