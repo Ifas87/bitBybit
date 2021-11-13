@@ -4,23 +4,52 @@
 		<link rel="preconnect" href="https://fonts.googleapis.com">
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;600;700&display=swap" rel="stylesheet">
-		<link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet" />
 		<link href="/favicon.ico" type="image/x-icon" rel="icon" />
+		<link href="../static/css/main.css" rel="stylesheet" type="text/css">
+		<link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet" />
 
-		<title>Document</title>
+		<title>bitBybit</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 	</head>
 
 	<body>
 		<main>
-			<form action="{{ url_for('create') }}">
-				<input name="submit" class="redirect" type="submit" value="Start">
-			</form>
-			<span class="title">bitBybit</span>
-			<span class="subtitle">A Secure File Sharing platform</span>
-			<!-- <button class="redirect">Start</button> -->
-			<div class="hex_background"></div>
+			<div class="topbar">
+				<ul>
+					<li><a href="{{ url_for('hello') }}" class="top_text">Home</a></li>
+					<li><a href="https://github.com/Ifas87/bitBybit" class="top_text">About</a></li>
+				</ul>
+			</div>
+
+			<div class="joinbar">
+				<table>
+					<form action="{{ url_for('select') }}">
+						<tr>
+							<td> <label class="q1" for="Enter">Already have a room?</label> </td>
+							<td> <input type="submit" class="Enter" name="Enter" value="Join"> </td>
+						</tr>
+					</form>
+				</table>
+			</div>
+
+			<div class="mainpage">
+				<span class="title">bitBybit</span>
+				<span class="subtitle">A Secure File Sharing platform</span>
+				<div class="image"></div>
+
+				<form action="{{ url_for('create ') }}">
+					<input name="submit" class="redirect" type="submit" value="New Room">
+				</form>
+			</div>
+
 			<div id='show_bg_2'></div>
 		</main>
+
+		<script>
+			document.querySelector(".Enter").onclick = function () {
+				location.href = "{{ url_for('select') }}";
+			};
+		</script>
+
 	</body>
 </html>
