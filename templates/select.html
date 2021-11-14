@@ -6,30 +6,42 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
     <link href="{{ url_for('static', filename='css/confirm.css') }}" rel="stylesheet" />
     <link href="../static/css/select.css" rel="stylesheet" type="text/css">
 </head>
 <body>
     <main>
-        <div class="hex_background"> </div>
-        <div class="foreground">
-            <h3 class="subtitle">Enter the name and passcode</h3>
-            <form enctype=multipart/form-data method="post" action="{{ url_for('chat') }}" id="mainform">
-                <label for="links" class="labels ln">Name: </label>
-                <input name="links" class="textboxes textln" type="text" data-max-words="1" placeholder="eg: sub">
-        
-                <label for="passcodes" class="labels sp">Security pin: </label>
-                <input name="passcodes" class="textboxes textsp" type="text" data-max-words="1" placeholder="eg: 123">
+        <div class="show_bg_2"></div>
+        <div class="topbar">
+            <ul>
+                <li><a href="{{ url_for('hello') }}" class="top_text">Home</a></li>
+            </ul>
+        </div>
 
-                <input name="submit" class="control a1" type="submit" value="Join">
-            </form>
-        
-            <form enctype=multipart/form-data method="post" action="{{ url_for('create') }}" id="mainform">
-                <label for="Create" class="alternative">Don't have one? Click below to create.</label>
-                <input name="Create" class="control a2" type="submit" value="Create">
-            </form>
+        <div class="center">
+            <div class="image"></div>
+            <span class="title">bitBybit</span>
+
+            <div class="formloc">
+                <form enctype=multipart/form-data method="post" action="{{ url_for('chat') }}" id="mainform"></form>
+                <table>
+                <tr> 
+                    <td> <label for="links" class="labels ln">Name: </label> </td> 
+                    <td> <input name="links" class="textboxes textln" type="text" data-max-words="1" placeholder="Enter room name"> </td>
+                </tr>
+
+                <tr>
+                    <td> <label for="passcodes" class="labels sp">Security pin: </label> </td>
+                    <td> <input name="passcodes" class="textboxes textsp" type="text" data-max-words="1" placeholder="eg: 123"> </td>
+                </tr> 
+
+                <tr> <td colspan="2"> <input name="submit" class="redirect" type="submit" value="Join"> </td> </tr>
+                </table>
+                </form>
+            </div>
         </div>
     </main>
 </body>

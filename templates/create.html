@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8">
           
-    <title>Html Generated</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-		<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;400;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
     <link href="{{ url_for('static', filename='css/create.css') }}" rel="stylesheet" />
     <link href="../static/css/create.css" rel="stylesheet" type="text/css">
 
@@ -15,6 +15,50 @@
           
   <body>
     <main>
+      <div class="show_bg_2"></div>
+        <div class="topbar">
+            <ul>
+                <li><a href="{{ url_for('hello') }}" class="top_text">Home</a></li>
+            </ul>
+        </div>
+
+        <div class="center">
+            <div class="image"></div>
+            <span class="title">bitBybit</span>
+
+            <div class="formloc">
+                <form enctype=multipart/form-data method="post" action="{{ url_for('chat') }}" id="mainform"></form>
+                <table>
+                <tr> 
+                    <td> <label for="links" class="labels ln">Name: </label> </td> 
+                    <td> <input name="links" class="textboxes textln" type="text" data-max-words="1" placeholder="Enter room name"> </td>
+                </tr>
+
+                <tr>
+                    <td> <label for="passcodes" class="labels sp">Security pin: </label> </td>
+                    <td> <input name="passcodes" class="textboxes textsp" type="text" data-max-words="1" placeholder="eg: 123"> </td>
+                </tr>
+                
+                <tr>
+                  <td> <label for="TTL" class="labels lat">Link expiration time: </label> </td>
+                  <td> <select name="TTL" class="dropdown textlat">
+                    <option value="0">Delete Immediately</option>
+                    <option value="0">After 1/2 an hour</option>
+                    <option value="1">After 1 hour</option>
+                    <option value="2">After 2 hours</option>
+                    <option value="3">After 4 hours</option>
+                    <option value="4">After 8 hours</option>
+                    <option value="5">Indefinitely</option>
+                  </select> </td>
+                </tr>
+
+                <tr> <td colspan="2"> <input name="submit" class="redirect" type="submit" value="Join"> </td> </tr>
+                </table>
+                </form>
+            </div>
+        </div>
+      
+        <!--
       <div class="hex_background"> </div>
       <div class="foreground">
         <div class="title"> bitBybit </div>
@@ -41,6 +85,7 @@
         <input name="submit" class="control a2" type="submit" value="submit">
       </form>
       </div>
+    -->
     </main>
   </body>
 </html>
