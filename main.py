@@ -20,7 +20,7 @@ dropzone = Dropzone(app)
 # Placeholder link
 @app.route('/chat',methods=['POST','GET'])
 def chat():
-    return "Hello chat"
+    return render_template('chat_template.html', template_folder='templates')
 
 
 @app.route('/create',methods=['POST','GET'])

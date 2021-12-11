@@ -5,23 +5,44 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
     <link href="{{ url_for('static', filename='css/chat_template.css') }}" rel="stylesheet" />
     <link href="../static/css/chat_template.css" rel="stylesheet" type="text/css">
 </head>
 <body>
-    <main>
+    <main class="mega-flex">
         <div class="show_bg">
 
-        </div>
-        <div class="hex_background">
+        </div class="filler">
+            <div class="topbar">
+                <ul>
+                    <li><a href="{{ url_for('hello') }}" class="top_text">Home</a></li>
+                </ul>
+            </div>
 
+            <div>
+                <h1 class="subtitle">bitBybit/{{ var }}</h1>
+            </div>
         </div>
 
-        <h1 class="subtitle">bitBybit/{{ var }}</h1>
+        <div class="content">
+            
+        </div>
+
         <div class="bottom_control">
             <form enctype=multipart/form-data method="post" action="{{ url_for('select') }}" id="mainform" class="dropzone" name="mainform">
-                <input name="files" type="file" class="files">
-                <textarea class="msg_box" from="mainform"></textarea>
+                <textarea class="msg_box" form="mainform" placeholder="Message"></textarea>
+                <label class="custom-file-upload">
+                    <img src="{{ url_for('static', filename='images/paperclip.png') }}" height="50px" width="50px">
+                    <input name="files" type="file" class="files" multiple>
+                </label>
+                <label class="custom-msg-submission">
+                    <img src="{{ url_for('static', filename='images/send.png') }}" height="50px" width="50px">
+                    <input name="send" type="submit" class="submit" value="">
+                </label>
             </form>
         </div>
     </main>
