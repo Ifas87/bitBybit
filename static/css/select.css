@@ -175,6 +175,12 @@ td, th {
 	top:305px;
 }
 
+.notice{
+	position:absolute;
+	left:475px;
+	top:405px;	
+}
+
 
 @media only screen and (max-width:1366px){
     .image{

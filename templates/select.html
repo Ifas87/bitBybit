@@ -9,11 +9,18 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
-    <link href="{{ url_for('static', filename='css/confirm.css') }}" rel="stylesheet" />
+    <link href="{{ url_for('static', filename='css/select.css') }}" rel="stylesheet" />
     <link href="../static/css/select.css" rel="stylesheet" type="text/css">
 </head>
 <body>
     <main>
+        {% with messages = get_flashed_messages() %}  
+        {% if messages %}  
+              {% for message in messages %}  
+                   <p>{{ message }}</p>  
+              {% endfor %}  
+        {% endif %}  
+        {% endwith %}  
         <div class="show_bg_2"></div>
         <div class="topbar">
             <ul>
@@ -26,21 +33,23 @@
             <span class="title">bitBybit</span>
 
             <div class="formloc">
-                <form enctype=multipart/form-data method="post" action="{{ url_for('chat') }}" id="mainform"></form>
+                <form action="{{ url_for('select') }}" enctype="multipart/form-data" method="post" id="mainform" role="form">
                 <table>
                 <tr> 
                     <td> <label for="links" class="labels ln">Name: </label> </td> 
-                    <td> <input name="links" class="textboxes textln" type="text" data-max-words="1" placeholder="Enter room name"> </td>
+                    <td> <input name="links" class="textboxes textln" type="text" data-max-words="1" placeholder="Enter room name" required> </td>
                 </tr>
 
                 <tr>
                     <td> <label for="passcodes" class="labels sp">Security pin: </label> </td>
-                    <td> <input name="passcodes" class="textboxes textsp" type="text" data-max-words="1" placeholder="eg: 123"> </td>
+                    <td> <input name="passcodes" class="textboxes textsp" type="text" data-max-words="1" placeholder="eg: 123" required> </td>
                 </tr> 
 
-                <tr> <td colspan="2"> <input name="submit" class="redirect" type="submit" value="Join"> </td> </tr>
+                <tr> <td colspan="2"> <input name="enter_chat" class="redirect" type="submit" value="Join"> </td> </tr>
                 </table>
                 </form>
+
+                <div class="notice"></div>
             </div>
         </div>
     </main>

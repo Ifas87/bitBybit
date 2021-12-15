@@ -34,7 +34,7 @@
 
         <div class="bottom_control">
             <form enctype=multipart/form-data method="post" action="{{ url_for('select') }}" id="mainform" class="dropzone" name="mainform">
-                <textarea class="msg_box" form="mainform" placeholder="Message"></textarea>
+                <textarea class="msg_box" form="mainform" placeholder="Message" maxlength = "500"></textarea>
                 <label class="custom-file-upload">
                     <img src="{{ url_for('static', filename='images/paperclip.png') }}" height="50px" width="50px">
                     <input name="files" type="file" class="files" multiple>
