@@ -130,6 +130,14 @@ td, th {
 	border-color: #1A73E8;
 }
 
+.err{
+	position: absolute;
+	top: 300px;
+	left: 750px;
+
+	width: 300px;
+}
+
 .labels{
 	color: #000;
 	font-family:Montserrat;

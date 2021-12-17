@@ -14,13 +14,6 @@
 </head>
 <body>
     <main>
-        {% with messages = get_flashed_messages() %}  
-        {% if messages %}  
-              {% for message in messages %}  
-                   <p>{{ message }}</p>  
-              {% endfor %}  
-        {% endif %}  
-        {% endwith %}  
         <div class="show_bg_2"></div>
         <div class="topbar">
             <ul>
@@ -49,7 +42,15 @@
                 </table>
                 </form>
 
-                <div class="notice"></div>
+                <div class="notice">
+                    {% with messages = get_flashed_messages() %}  
+                    {% if messages %}  
+                        {% for message in messages %}  
+                        <p class="top_text err">{{ message }}</p>  
+                        {% endfor %}  
+                    {% endif %}  
+                    {% endwith %}  
+                </div>
             </div>
         </div>
     </main>

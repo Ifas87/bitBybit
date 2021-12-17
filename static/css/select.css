@@ -124,6 +124,14 @@ td, th {
 	cursor: pointer;
 }
 
+.err{
+	position: absolute;
+	top: 0px;
+	left: 200px;
+
+	width: 300px;
+}
+
 .redirect:hover {
 	background: #fff;
 	color: #1A73E8;
