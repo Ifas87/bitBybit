@@ -17,6 +17,7 @@ ERR_word = "Room names are only one word long!"
 ERR_same = "Room with that name already exists!"
 
 newRoomRegex = "^(\w+)$"
+customPath = r""
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 
@@ -81,33 +82,63 @@ def select():
             print(line.split(" : ")[0] + " : " + line.split(" : ")[1])
             while line:
                 if(line.split(" : ")[0] == room):
-                    print("Same room")
-                    if ((line.split(" : ")[1]).strip() == passcode):
+                    if not (line.split(" : ")[1]).strip():
                         print("Success")
                         session["current_room"] = room
                         return redirect(url_for('chat'))
+                    
                     else:
-                        flash(ERR_pass)
-                        line = f.readline()
-                        return redirect(url_for('select'))
+                        if ((line.split(" : ")[1]).strip() == passcode):
+                            print("Success")
+                            session["current_room"] = room
+                            return redirect(url_for('chat'))
+                        else:
+                            flash(ERR_pass)
+                            line = f.readline()
+                            return redirect(url_for('select'))
                 else:
-                    flash(ERR_room)
                     line = f.readline()
-                    return redirect(url_for('select'))
+                    continue
+
+            flash(ERR_room)
+            return redirect(url_for('select'))
                 
     return render_template('select.html', template_folder='templates')
 
 
 @app.route('/')
 def hello():
+    session["current_room"] = "placeholder"
     return render_template('index.html', template_folder='templates')
 
 
 # Placeholder link
 @app.route('/chat',methods=['POST','GET'])
 def chat():
+    keyCount = 0
+
+    chat_content = {}
     roomname = session["current_room"]
-    return render_template('chat_template.html', template_folder='templates', var=roomname)
+    customPath = "" + FILESYSTEM_dir + "/" + roomname
+
+    print(FILESYSTEM_dir)
+    directory = os.fsencode(FILESYSTEM_dir)
+    
+    for file in os.listdir(customPath):
+        filename = os.fsdecode(file)
+        print(filename)
+        if filename.endswith(".txt"): 
+            with open((customPath + "/" + filename), "r", encoding = 'utf-8') as f:
+                data = f.read().replace('\n', ' ')
+            chat_content[("tEXt"+str(keyCount))] = data
+            keyCount+=1
+
+        elif filename.endswith(".zip") or filename.endswith('.tar.gz'):
+            chat_content[filename] = (customPath + "/" + filename)
+            keyCount+=1
+        
+        print(chat_content)
+    return render_template('chat_template.html', template_folder='templates', var=roomname, dict_item=chat_content)
 
 
 if __name__=='__main__':

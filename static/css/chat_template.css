@@ -99,6 +99,10 @@ ul li {
 
     width: 600px;
     height: 50px;
+
+    font-family: Montserrat;
+	font-weight: 500;
+	font-size: 15px;
 }
 
 .files{
@@ -143,4 +147,23 @@ ul li {
     z-index: 3;
 
     background-color: #ededed;
+}
+
+.msgboxes{
+    padding: 10px;
+
+    border: 10px;
+    border-bottom-color: #0F3F7D;
+
+    font-family: Montserrat;
+	font-weight: 500;
+	font-size: 15px;
+
+    width: 600px;
+    height: auto;
+
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
 }
