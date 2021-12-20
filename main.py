@@ -36,6 +36,11 @@ app.config.update(
 secret = secrets.token_urlsafe(32)
 app.secret_key = secret
 
+@app.route('/downloader/', methods=['POST', 'GET'])
+def retreive():
+    filename = request.args.get('data-status')
+    return send_file(filename)
+
 @app.route('/create',methods=['POST','GET'])
 def create():
     print("here")
@@ -60,6 +65,7 @@ def create():
                 return redirect(url_for('create'))
             
             session["current_room"] = room
+            os.mkdir((FILESYSTEM_dir+"/"+room))
             with open(PATH_chats, "a", encoding = 'utf-8') as f:
                 f.write("{} : {}\n".format(room, passcode))
             return redirect(url_for('chat'))
@@ -112,21 +118,33 @@ def hello():
     return render_template('index.html', template_folder='templates')
 
 
-# Placeholder link
 @app.route('/chat',methods=['POST','GET'])
 def chat():
-    keyCount = 0
-
-    chat_content = {}
     roomname = session["current_room"]
     customPath = "" + FILESYSTEM_dir + "/" + roomname
 
-    print(FILESYSTEM_dir)
+    if request.method == 'POST':
+        if not request.files.getlist("files"):
+            files = request.files.getlist("files")
+            temp_str = "tupac.zip"
+            for file in files:
+                print("filename: ", file.filename)
+                file.save((customPath + "/" + file.filename))
+        
+        text = request.form.get('chatarea')
+        if not text == "":
+            timestr = time.strftime("%Y%m%d-%H%M%S") + ".txt"
+            with open((customPath+"/"+timestr), "w") as f:
+                f.write(text)
+
+    keyCount = 0
+    chat_content = {}
+
     directory = os.fsencode(FILESYSTEM_dir)
     
     for file in os.listdir(customPath):
         filename = os.fsdecode(file)
-        print(filename)
+        #print(filename)
         if filename.endswith(".txt"): 
             with open((customPath + "/" + filename), "r", encoding = 'utf-8') as f:
                 data = f.read().replace('\n', ' ')
@@ -137,7 +155,7 @@ def chat():
             chat_content[filename] = (customPath + "/" + filename)
             keyCount+=1
         
-        print(chat_content)
+        #print(chat_content)
     return render_template('chat_template.html', template_folder='templates', var=roomname, dict_item=chat_content)
 
 

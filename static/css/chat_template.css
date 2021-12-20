@@ -151,9 +151,11 @@ ul li {
 
 .msgboxes{
     padding: 10px;
+    margin: 10px;
 
-    border: 10px;
-    border-bottom-color: #0F3F7D;
+    border: solid #0F3F7D;
+    border-width: 8px;
+    border-radius: 25px;
 
     font-family: Montserrat;
 	font-weight: 500;
@@ -161,9 +163,21 @@ ul li {
 
     width: 600px;
     height: auto;
+    overflow-wrap: break-word;
 
     display: flex;
     justify-content: center;
     align-content: center;
     flex-direction: column;
+}
+
+.retrieval{
+    display: none;
+    border: 0;
+    background: none;
+    box-shadow: none;
+}
+
+.point{
+    cursor: pointer;
 }
