@@ -7,6 +7,7 @@ from datetime import datetime
 import tarfile
 import secrets
 import re
+from threading import Thread
 
 
 FILESYSTEM_dir = r"C:\Users\Safi\Desktop\Safi\Year 3\CST 3590 Individual Project\Project files\bitBybit v2\content"
@@ -16,15 +17,11 @@ ERR_room = "No room by that name present!"
 ERR_word = "Room names are only one word long!"
 ERR_same = "Room with that name already exists!"
 
+current_chat = ""
 newRoomRegex = "^(\w+)$"
 customPath = r""
 
 basedir = os.path.abspath(os.path.dirname(__file__))
-
-"""
-    timestr = time.strftime("%Y%m%d-%H%M%S")
-    print(timestr)
-"""
 
 app = Flask(__name__)
 app.config.update(
@@ -35,6 +32,25 @@ app.config.update(
 
 secret = secrets.token_urlsafe(32)
 app.secret_key = secret
+
+def timer(t, chatname):
+    time.sleep(3)
+    print(current_chat, chatname)
+    with app.app_context(), app.test_request_context():
+        while t:
+            time.sleep(1)
+            t -= 1
+            print(t)
+    
+        if current_chat == chatname:
+            print("same")
+            os.rmdir(FILESYSTEM_dir + "/" + chatname)
+            return redirect(url_for('create'))
+        else:
+            print("not same")
+            os.rmdir(FILESYSTEM_dir + "/" + chatname)
+
+
 
 @app.route('/downloader/', methods=['POST', 'GET'])
 def retreive():
@@ -59,7 +75,6 @@ def create():
         reg = re.compile( r'^(?=.*\b(?:' + "|".join(allRoomNames) + r')\b).*foo' )
 
         if(re.search(newRoomRegex, room)):
-            # Search for existing rooms with the same name
             if(reg.findall(room)):
                 flash(ERR_same)
                 return redirect(url_for('create'))
@@ -68,6 +83,10 @@ def create():
             os.mkdir((FILESYSTEM_dir+"/"+room))
             with open(PATH_chats, "a", encoding = 'utf-8') as f:
                 f.write("{} : {}\n".format(room, passcode))
+            
+            thread = Thread(target = timer, args = (10, room))
+            thread.start()
+            
             return redirect(url_for('chat'))
         else:
             flash(ERR_word)
@@ -118,15 +137,38 @@ def hello():
     return render_template('index.html', template_folder='templates')
 
 
+@app.route('/updater', methods=['POST','GET'])
+def update():
+    roomname = session["current_room"]
+    customPath = "" + FILESYSTEM_dir + "/" + roomname
+    keyCount = 0
+    chat_content = {}
+
+    for file in os.listdir(customPath):
+        filename = os.fsdecode(file)
+        if filename.endswith(".txt"): 
+            with open((customPath + "/" + filename), "r", encoding = 'utf-8') as f:
+                data = f.read().replace('\n', ' ')
+            chat_content[("tEXt"+str(keyCount))] = data
+            keyCount+=1
+
+        else:
+            chat_content[filename] = (customPath + "/" + filename)
+            keyCount+=1
+
+    return json.dumps(chat_content)
+
+
 @app.route('/chat',methods=['POST','GET'])
 def chat():
     roomname = session["current_room"]
     customPath = "" + FILESYSTEM_dir + "/" + roomname
+    global current_chat
+    current_chat = session["current_room"]
 
     if request.method == 'POST':
-        if not request.files.getlist("files"):
+        if request.files.getlist("files"):
             files = request.files.getlist("files")
-            temp_str = "tupac.zip"
             for file in files:
                 print("filename: ", file.filename)
                 file.save((customPath + "/" + file.filename))
@@ -144,18 +186,16 @@ def chat():
     
     for file in os.listdir(customPath):
         filename = os.fsdecode(file)
-        #print(filename)
         if filename.endswith(".txt"): 
             with open((customPath + "/" + filename), "r", encoding = 'utf-8') as f:
                 data = f.read().replace('\n', ' ')
             chat_content[("tEXt"+str(keyCount))] = data
             keyCount+=1
 
-        elif filename.endswith(".zip") or filename.endswith('.tar.gz'):
+        else:
             chat_content[filename] = (customPath + "/" + filename)
             keyCount+=1
         
-        #print(chat_content)
     return render_template('chat_template.html', template_folder='templates', var=roomname, dict_item=chat_content)
 
 

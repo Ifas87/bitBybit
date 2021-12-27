@@ -11,6 +11,10 @@
 
     <link href="{{ url_for('static', filename='css/chat_template.css') }}" rel="stylesheet" />
     <link href="../static/css/chat_template.css" rel="stylesheet" type="text/css">
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" defer></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='JS/updating.js') }}" defer></script>
 </head>
 <body>
     <main class="mega-flex">
@@ -18,9 +22,7 @@
 
         </div class="filler">
             <div class="topbar">
-                <ul>
-                    <li><a href="{{ url_for('hello') }}" class="top_text">Home</a></li>
-                </ul>
+                <a href="{{ url_for('hello') }}" class="top_text">Home</a>
             </div>
 
             <div>
@@ -33,11 +35,14 @@
                 {% if key.startswith('tEXt') %}
                     <div class="msgboxes"> {{ value }} </div>
                 {% else %}
-                    <form action="/downloader/?data-status={{ value }}" method="post">
-                        <label class="msgboxes point">
-                            <input name="retrieval" class="retrieval" value="{{ key }}" type="submit"> {{ key }}
-                        </label>
-                    </form>
+                    <div class="msgboxes">
+                        <form action="/downloader/?data-status={{ value }}" method="post">
+                            <label class="point">
+                                <div class="iamge"></div>
+                                <input name="retrieval" class="retrieval" value="{{ key }}" type="submit">{{ key }}
+                            </label>
+                        </form>
+                    </div>
                 {% endif %}
             {% endfor %}
         </div>
