@@ -2,12 +2,13 @@ console.log("Imported Successfully");
 
 var repeater;
 var newval = ``;
-
+var roomname = document.querySelector(".subtitle");
+console.log(roomname.innerHTML);
 
 function doWork() {
     $.ajax({
         url: '/updater',
-        data: 'Update',
+        data: roomname.innerHTML,
         type: 'POST',
         dataType: 'json',
 
@@ -16,6 +17,11 @@ function doWork() {
                 if (index.startsWith('tEXt')){
                     newval += `<div class="msgboxes"> ${value} </div>`;
                 }
+
+                else if(index.startsWith('DEL')){
+                    newval += `<div class="msgboxes"> ${value} </div>`;
+                }
+
                 else {
                     newval += `<div class="msgboxes">
                     <form action="/downloader/?data-status=${value}" method="post">

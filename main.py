@@ -25,10 +25,10 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 
 app = Flask(__name__)
 app.config.update(
-    UPLOADED_PATH= os.path.join(basedir,'uploads'),
-    DROPZONE_MAX_FILE_SIZE = 1024,
-    DROPZONE_TIMEOUT = 5*60*1000
+    UPLOADED_PATH= os.path.join(basedir,'content')
 )
+
+app.config['UPLOAD_FOLDER'] = FILESYSTEM_dir
 
 secret = secrets.token_urlsafe(32)
 app.secret_key = secret
@@ -49,13 +49,23 @@ def timer(t, chatname):
         else:
             print("not same")
             os.rmdir(FILESYSTEM_dir + "/" + chatname)
+        
+    with open(PATH_chats, 'r') as read_file:
+        lines = read_file.readlines()
+        print(lines)
 
+    with open(PATH_chats, 'w') as write_file:
+        for line in lines:
+            if chatname in line:
+                continue
+            write_file.write(line)
 
 
 @app.route('/downloader/', methods=['POST', 'GET'])
 def retreive():
     filename = request.args.get('data-status')
     return send_file(filename)
+
 
 @app.route('/create',methods=['POST','GET'])
 def create():
@@ -69,7 +79,7 @@ def create():
         with open(PATH_chats, encoding = 'utf-8') as f:
                 line = f.readline()
                 while line:
-                    allRoomNames.append(line.split()[0].strip())
+                    allRoomNames.append(line.split(":")[0].strip())
                     line = f.readline()
 
         reg = re.compile( r'^(?=.*\b(?:' + "|".join(allRoomNames) + r')\b).*foo' )
@@ -92,6 +102,11 @@ def create():
             flash(ERR_word)
             return redirect(url_for('create'))
     return render_template('create.html', template_folder='templates')
+
+
+@app.route('/options',methods=['POST','GET'])
+def options():        
+    return render_template('options.html', template_folder='templates')
 
 
 @app.route('/select',methods=['POST','GET'])
@@ -139,24 +154,29 @@ def hello():
 
 @app.route('/updater', methods=['POST','GET'])
 def update():
-    roomname = session["current_room"]
-    customPath = "" + FILESYSTEM_dir + "/" + roomname
-    keyCount = 0
-    chat_content = {}
+    if request.method == 'POST':
+        roomname = request.get_data()
+        customPath = "" + FILESYSTEM_dir + "/" + roomname
+        keyCount = 0
+        chat_content = {}
 
-    for file in os.listdir(customPath):
-        filename = os.fsdecode(file)
-        if filename.endswith(".txt"): 
-            with open((customPath + "/" + filename), "r", encoding = 'utf-8') as f:
-                data = f.read().replace('\n', ' ')
-            chat_content[("tEXt"+str(keyCount))] = data
-            keyCount+=1
+        if os.path.exists(customPath):
+            for file in os.listdir(customPath):
+                filename = os.fsdecode(file)
+                if filename.endswith(".txt"): 
+                    with open((customPath + "/" + filename), "r", encoding = 'utf-8') as f:
+                        data = f.read().replace('\n', ' ')
+                    chat_content[("tEXt"+str(keyCount))] = data
+                    keyCount+=1
 
+                else:
+                    chat_content[filename] = (customPath + "/" + filename)
+                    keyCount+=1
+        
         else:
-            chat_content[filename] = (customPath + "/" + filename)
-            keyCount+=1
+            chat_content["DELETED"] = "".format('"{}" timer has expired ', roomname)
 
-    return json.dumps(chat_content)
+        return json.dumps(chat_content)
 
 
 @app.route('/chat',methods=['POST','GET'])
@@ -167,17 +187,20 @@ def chat():
     current_chat = session["current_room"]
 
     if request.method == 'POST':
-        if request.files.getlist("files"):
-            files = request.files.getlist("files")
-            for file in files:
-                print("filename: ", file.filename)
-                file.save((customPath + "/" + file.filename))
-        
         text = request.form.get('chatarea')
         if not text == "":
             timestr = time.strftime("%Y%m%d-%H%M%S") + ".txt"
             with open((customPath+"/"+timestr), "w") as f:
                 f.write(text)
+        
+
+        if request.files.getlist("files") or not any(f for f in request.files.getlist("files")):
+        #if request.files.getlist("files"):
+            files = request.files.getlist("files")
+            for file in files:
+                print("filename: ", file.filename)
+                #file.save((customPath + "/" + file.filename))
+                file.save(os.path.join(app.config['UPLOAD_FOLDER'], (roomname+"/"+file.filename)))
 
     keyCount = 0
     chat_content = {}
