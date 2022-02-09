@@ -109,6 +109,11 @@ def options():
     return render_template('options.html', template_folder='templates')
 
 
+@app.route('/versions',methods=['POST','GET'])
+def versions():        
+    return render_template('versions.html', template_folder='templates')
+
+
 @app.route('/select',methods=['POST','GET'])
 def select():
     print("here")

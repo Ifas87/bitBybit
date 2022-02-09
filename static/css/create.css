@@ -46,10 +46,10 @@ ul li {
 .title {
 	color: #000;
 	position: absolute;
-	top: 100px;
-	left: 570px;
+	top: 5%;
+	left: 40%;
 	font-family: Montserrat;
-	font-weight: 500;
+	font-weight: 600;
 	font-size: 80px;
 	opacity: 1;
 	text-align: left;
@@ -87,27 +87,35 @@ ul li {
 	height: 160px;
 }
 
-td, th {
-	padding: 10px;
-	text-align:center;
+.center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 550px;
+    height: 300px;
+    margin-top: -150px;
+    margin-left: -275px;
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
 }
 
-.formloc{
-	position: absolute;
-	top: 100px;
-	left: 350px;
+.buffer{
+    display: flex;
+    flex-direction: row;
+    width:auto;
+    margin: 10px;
+    padding: 10px;
 
-	height: 500px;
-	width: 500px;
+    justify-content: center;
+    align-items: center;
 }
 
 .redirect {
 	height: 50px;
 	width: 200px;
 	color: rgba(239,239,239,1);
-	position: absolute;
-	top: 470px;
-	left: 280px;
   
 	font-family: Montserrat;
 	font-weight: 600;
@@ -118,10 +126,10 @@ td, th {
   
 	border: 5px;
 	border-color: #efefef;
-	z-index: 3;
 	-webkit-transition-duration: 0.4s; /* Safari */
 	transition-duration: 0.5s;
 	cursor: pointer;
+
 }
 
 .redirect:hover {
@@ -141,9 +149,12 @@ td, th {
 .labels{
 	color: #000;
 	font-family:Montserrat;
-	font-weight: 500;
+	font-weight: 600;
 	font-size:30px;
 	letter-spacing:0;
+
+	margin: 10px;
+	width: 250px;
 }
 
 .textboxes {
@@ -155,26 +166,8 @@ td, th {
 	font-family:Montserrat;
 	font-size: 20px;
 
-	padding: 5px;
-	font-weight: 500;
-}
-
-.ln {
-	position:absolute;
-	left:175px;
-	top:200px;
-}
-
-.sp {
-	position:absolute;
-	left:155px;
-	top:275px;
-}
-
-.lat{
-	position:absolute;
-	left:55px;
-	top:350px;
+	margin: 10px;
+	font-weight: 600;
 }
 
 .textlat{
@@ -187,30 +180,14 @@ td, th {
 	font-size: 20px;
 
 	padding: 5px;
-	font-weight: 500;
-
-	position:absolute;
-	left: 385px;
-	top:350px;
-}
-
-.textln {
-	position:absolute;
-	left:350px;
-	top:200px;
-}
-
-.textsp {
-	position:absolute;
-	left:375px;
-	top:275px;
+	font-weight: 600;
 }
 
 @media only screen and (max-width:1366px){
 	.image{
 		position: absolute;
 		top: 25px;
-		left: 850px;
+		left: 85%;
 	  
 		width: 125px;
 		height: 125px;
@@ -238,7 +215,7 @@ td, th {
 		font-size: 90px;
 
 		position: absolute;
-		top: 80px;
+		top: 40px;
 		left: 310px;
 	}
 
@@ -246,69 +223,27 @@ td, th {
 		font-size: 85px;
 	}
 
-	.formloc {
+	.center {
 		position: absolute;
-		top: 70px;
-		left: 240px;
+		top: 30%;
 	}
-
-	td, th{
-		width: 500px;
-		padding: 30px;
+	
+	.buffer{
+		flex-direction: row;
 	}
 
 	.labels{
-		font-size: 30px;
-		font-weight: 500;
+		font-size: 25px;
+		font-weight: 600;
 	}
 
 	.textboxes{
-		font-size: 30px;
-		font-weight: 500;
-	}
-
-	.ln{
-		position: absolute;
-		top: 170px;
-		left: 80px;
-	}
-
-	.textln{
-		position: absolute;
-		top: 160px;
-		left: 200px;
-
-		width: 300px;
-		height: 40px;
-	}
-
-	.sp{
-		position: absolute;
-		top: 260px;
-		left: 80px;
-	}
-
-	.textsp{
-		position: absolute;
-		top: 240px;
-		left: 280px;
-
-		width: 220px;
-		height: 40px;
+		font-size: 25px;
+		font-weight: 600;
 	}
 
 	.redirect{
-		position: absolute;
-		top: 450px;
-		left: 180px;
-
 		font-size: 25px;
-	}
-
-	.lat{
-		position:absolute;
-		left:25px;
-		top:345px;
 	}
 	
 	.textlat{
@@ -321,19 +256,15 @@ td, th {
 		font-size: 20px;
 	
 		padding: 5px;
-		font-weight: 500;
-	
-		position:absolute;
-		left: 365px;
-		top:340px;
+		font-weight: 600;
 	}
 }
 
-@media only screen and (max-width:800px){
+@media only screen and (max-width:850px){
 	.image{
 		position: absolute;
 		top: 25px;
-		left: 600px;
+		left: 80%;
 	  
 		width: 125px;
 		height: 125px;
@@ -358,36 +289,34 @@ td, th {
 	}
 
 	.title{
-		font-size: 90px;
+		font-size: 70px;
 
 		position: absolute;
-		top: 80px;
-		left: 210px;
+		top: 20px;
+		left: 220px;
 	}
 
 	.title:hover{
 		font-size: 85px;
 	}
 
-	.formloc {
+	.center {
 		position: absolute;
-		top: 70px;
-		left: 130px;
+		top: 30%;
 	}
-
-	td, th{
-		width: 500px;
-		padding: 30px;
+	
+	.buffer{
+		flex-direction: row;
 	}
 
 	.labels{
-		font-size: 30px;
-		font-weight: 500;
+		font-size: 25px;
+		font-weight: 600;
 	}
 
 	.textboxes{
-		font-size: 30px;
-		font-weight: 500;
+		font-size: 25px;
+		font-weight: 600;
 	}
 
 	.ln{
@@ -421,10 +350,6 @@ td, th {
 	}
 
 	.redirect{
-		position: absolute;
-		top: 450px;
-		left: 155px;
-
 		font-size: 25px;
 	}
 
@@ -444,11 +369,7 @@ td, th {
 		font-size: 20px;
 	
 		padding: 5px;
-		font-weight: 500;
-	
-		position:absolute;
-		left: 315px;
-		top:355px;
+		font-weight: 600;
 	}
 }
 
@@ -501,12 +422,12 @@ td, th {
 
 	.labels{
 		font-size: 20px;
-		font-weight: 500;
+		font-weight: 600;
 	}
 
 	.textboxes{
 		font-size: 20px;
-		font-weight: 500;
+		font-weight: 600;
 	}
 
 	.ln{
@@ -540,10 +461,6 @@ td, th {
 	}
 
 	.redirect{
-		position: absolute;
-		top: 475px;
-		left: 155px;
-
 		font-size: 25px;
 	}
 
@@ -565,15 +482,11 @@ td, th {
 		font-size: 18px;
 	
 		padding: 5px;
-		font-weight: 500;
-	
-		position:absolute;
-		left: 215px;
-		top:355px;
+		font-weight: 600;
 	}
 }
 
-@media only screen and (max-width:550px) and (max-height:900px){
+@media only screen and (max-width:550px) and (max-height:920px){
 	.image{
 		background: url();
 		position: absolute;
@@ -604,78 +517,38 @@ td, th {
 		top: 80px;
 		left: 60px;
 
-		font-weight: 500;
+		font-weight: 600;
 	}
 
 	.title:hover{
 		font-size: 62px;
 	}
 
-	.formloc {
+	.center {
 		position: absolute;
-		top: 30px;
-		left: -80px;
+		top: 40%;
 	}
-
-	td, th{
-		width: 150px;
-		padding: 5px;
+	
+	.buffer{
+		flex-direction: column;
 	}
 
 	.labels{
 		font-size: 20px;
-		font-weight: 500;
+		font-weight: 600;
+
+		margin:5px;
 	}
 
 	.textboxes{
 		font-size: 20px;
-		font-weight: 500;
-	}
+		font-weight: 600;
 
-	.ln{
-		position: absolute;
-		top: 200px;
-		left: 100px;
-	}
-
-	.textln{
-		position: absolute;
-		top: 180px;
-		left: 200px;
-
-		width: 200px;
-		height: 40px;
-	}
-
-	.sp{
-		position: absolute;
-		top: 290px;
-		left: 100px;
-	}
-
-	.textsp{
-		position: absolute;
-		top: 270px;
-		left: 240px;
-
-		width: 180px;
-		height: 40px;
+		margin:5px;
 	}
 
 	.redirect{
-		position: absolute;
-		top: 475px;
-		left: 155px;
-
 		font-size: 25px;
-	}
-
-	.lat{
-		position:absolute;
-		left: 105px;
-		top:355px;
-
-		width:min-content;
 	}
 	
 	.textlat{
@@ -688,11 +561,7 @@ td, th {
 		font-size: 18px;
 	
 		padding: 5px;
-		font-weight: 500;
-	
-		position:absolute;
-		left: 215px;
-		top:355px;
+		font-weight: 600;
 	}
 }
 
@@ -732,71 +601,27 @@ td, th {
 		font-size: 62px;
 	}
 
-	.formloc {
+	.center {
 		position: absolute;
-		top: 30px;
-		left: -80px;
+		top: 50%;
 	}
-
-	td, th{
-		width: 150px;
-		padding: 5px;
+	
+	.buffer{
+		flex-direction: column;
 	}
 
 	.labels{
 		font-size: 18px;
-		font-weight: 500;
+		font-weight: 600;
 	}
 
 	.textboxes{
 		font-size: 18px;
-		font-weight: 500;
-	}
-
-	.ln{
-		position: absolute;
-		top: 200px;
-		left: 95px;
-	}
-
-	.textln{
-		position: absolute;
-		top: 180px;
-		left: 180px;
-
-		width: 200px;
-		height: 40px;
-	}
-
-	.sp{
-		position: absolute;
-		top: 290px;
-		left: 95px;
-	}
-
-	.textsp{
-		position: absolute;
-		top: 270px;
-		left: 220px;
-
-		width: 160px;
-		height: 40px;
+		font-weight: 600;
 	}
 
 	.redirect{
-		position: absolute;
-		top: 470px;
-		left: 140px;
-
 		font-size: 25px;
-	}
-
-	.lat{
-		position:absolute;
-		left: 95px;
-		top:355px;
-
-		width:min-content;
 	}
 	
 	.textlat{
@@ -809,10 +634,77 @@ td, th {
 		font-size: 15px;
 	
 		padding: 5px;
-		font-weight: 500;
+		font-weight: 600;
+	}
+}
+
+@media only screen and (max-width:400px) and (max-height:800px){
+	.image{
+		background: url();
+		position: absolute;
+		top: 0px;
+		left: 0px;
+	  
+		width: 0px;
+		height: 0px;
+
+		opacity: 0.15;
+		z-index: 1;
+	}
 	
-		position:absolute;
-		left: 200px;
-		top:355px;
+	.topbar{
+		position: absolute;
+		top: 5px;
+		left: -30px;
+	}
+
+	.top_text{
+		font-size: 20px;
+	}
+
+	.title{
+		font-size: 55px;
+
+		position: absolute;
+		top: 80px;
+		left: 50px;
+	}
+
+	.title:hover{
+		font-size: 62px;
+	}
+
+	.center {
+		position: absolute;
+		top: 50%;
+	}
+	
+	.buffer{
+		flex-direction: column;
+	}
+
+	.labels{
+		font-size: 18px;
+		font-weight: 600;
+
+		margin: 5px;
+	}
+
+	.textboxes{
+		font-size: 18px;
+		font-weight: 600;
+
+		margin: 5px;
+	}
+
+	.redirect{
+		font-size: 25px;
+	}
+	
+	.textlat{
+		font-size: 15px;
+	
+		padding: 5px;
+		font-weight: 600;
 	}
 }

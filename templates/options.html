@@ -9,8 +9,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
-    <link href="{{ url_for('static', filename='css/select.css') }}" rel="stylesheet" />
-    <link href="../static/css/select.css" rel="stylesheet" type="text/css">
+    <link href="{{ url_for('static', filename='css/options.css') }}" rel="stylesheet" />
+    <link href="../static/css/options.css" rel="stylesheet" type="text/css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="../static/JS/options.js" defer></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='JS/options.js') }}" defer></script>
 </head>
 <body>
     <main>
@@ -21,37 +25,36 @@
             </ul>
         </div>
 
-        <div class="center">
-            <div class="image"></div>
-            <span class="title">bitBybit</span>
+        <div class="image"></div>
 
-            <div class="formloc">
-                <form action="{{ url_for('select') }}" enctype="multipart/form-data" method="post" id="mainform" role="form">
-                <table>
-                <tr> 
-                    <td> <label for="links" class="labels ln">Name: </label> </td> 
-                    <td> <input name="links" class="textboxes textln" type="text" data-max-words="1" placeholder="Enter room name" required> </td>
-                </tr>
+        <div class="buffer">
+            <h1 class="title">bitBybit</h1>
+        </div>
 
-                <tr>
-                    <td> <label for="passcodes" class="labels sp">Security pin: </label> </td>
-                    <td> <input name="passcodes" class="textboxes textsp" type="text" data-max-words="1" placeholder="eg: 123"> </td>
-                </tr> 
-
-                <tr> <td colspan="2"> <input name="enter_chat" class="redirect" type="submit" value="Join"> </td> </tr>
-                </table>
-                </form>
-
-                <div class="notice">
-                    {% with messages = get_flashed_messages() %}  
-                    {% if messages %}  
-                        {% for message in messages %}  
-                        <p class="top_text err">{{ message }}</p>  
-                        {% endfor %}  
-                    {% endif %}  
-                    {% endwith %}  
+        <div class="formcontents">
+            <form action="{{ url_for('options') }}" enctype="multipart/form-data" method="post" id="mainform" role="form">
+                <div class="buffer">
+                    <label for="files" class="labels">File upload: </label>
+                    <label class="custom-file-upload">
+                        <img src="{{ url_for('static', filename='images/paperclip.png') }}" height="50px" width="50px">
+                        <input name="files" type="file" class="files" multiple>
+                    </label>
                 </div>
-            </div>
+
+                <div class="buffer">
+                    <label for="links" class="labels">Name: </label>
+                    <input name="links" class="textboxes textln" type="text" data-max-words="1" placeholder="Enter room name" required>
+                </div>
+
+                <div class="buffer">
+                    <label class="labels small">Compress as ZIP:</label>
+                    <input type="checkbox" id="switch">
+                </div>
+
+                <div class="buffer">
+                    <input name="enter_chat" class="redirect" type="submit" value="Join">
+                </div>
+            </form>
         </div>
     </main>
 </body>

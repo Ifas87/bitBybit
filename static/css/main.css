@@ -197,7 +197,7 @@ td, th {
 /*
   Tablet size large: Landscape
 */
-@media only screen and (max-width:1366px){
+@media only screen and (max-width:1400px){
   #show_bg_2 {
     background: linear-gradient(99.09deg, #FFFFFF 28.51%, #EFEFEF 96.45%);
   }
@@ -279,7 +279,7 @@ td, th {
 /*
   Modern Ipad: portrait
 */
-@media only screen and (max-width:800px){
+@media only screen and (max-width:925px){
   #show_bg_2 {
     background: linear-gradient(99.09deg, #FFFFFF 28.51%, #EFEFEF 96.45%);
   }
@@ -364,7 +364,7 @@ td, th {
 */
 
 
-@media only screen and (max-width:550px) and (max-height:900px){
+@media only screen and (max-width:550px) and (max-height:920px){
   #show_bg_2 {
     background: #fff;
   }
@@ -373,6 +373,80 @@ td, th {
     position: absolute;
     top: 200px;
     left: 108px;
+
+    width: 200px;
+    height: 200px;
+
+    opacity: 0.1;
+  }
+
+  .image:hover{
+    width: 200px;
+    height: 200px;
+  }
+
+  .topbar{
+    position:absolute;
+    top:5px;
+    left:-30px
+  }
+
+  .top_text{
+    padding: 10px;
+    font-size: 20px;
+  }
+
+  .title{
+    font-size: 64px;
+
+    top: 140px;
+    left: 20px;
+  }
+
+  .title:hover{
+    font-size: 70px;
+  }
+
+  .subtitle{
+    font-size: 25px;
+    width: 300px;
+
+    top: 230px;
+    left: 25px;
+  }
+
+  .subtitle:hover{ font-size: 27px;}
+
+  .redirect{
+    position: absolute;
+    top: 370px;
+    left: 20px;
+
+    width: 200px;
+    height: 40px;
+
+    font-size: 20px;
+  }
+
+  .joinbar{
+    position:absolute;
+
+    top: 530px;
+    left: 30px;
+
+    width: 80%
+  }
+}
+
+@media only screen and (max-width:400px) and (max-height: 700px){
+  #show_bg_2 {
+    background: #fff;
+  }
+
+  .image{
+    position: absolute;
+    top: 200px;
+    left: 65px;
 
     width: 200px;
     height: 200px;
@@ -430,14 +504,14 @@ td, th {
   .joinbar{
     position:absolute;
 
-    top: 530px;
+    top: 500px;
     left: 30px;
 
     width: 80%
   }
 }
 
-@media only screen and (max-width:400px) and (max-height: 600px){
+@media only screen and (max-width:300px){
   #show_bg_2 {
     background: #fff;
   }
@@ -445,7 +519,7 @@ td, th {
   .image{
     position: absolute;
     top: 200px;
-    left: 65px;
+    left: 45px;
 
     width: 200px;
     height: 200px;
@@ -470,7 +544,7 @@ td, th {
   }
 
   .title{
-    font-size: 64px;
+    font-size: 54px;
 
     top: 140px;
     left: 20px;
@@ -483,6 +557,7 @@ td, th {
   .subtitle{
     font-size: 25px;
 
+    width: 250px;
     top: 230px;
     left: 25px;
   }

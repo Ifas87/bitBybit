@@ -72,10 +72,6 @@ ul li {
 }
 
 .bottom_control{
-    /*
-    position: absolute;
-    top: 80%;
-    */
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
