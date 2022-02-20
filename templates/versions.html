@@ -36,7 +36,9 @@
                 <div class="buffer">
                     <label for="versions" class="labels">Link expiration time: </label>
 						<select name="versions" class="textlat">
-							<option value="Version 1">Version 1</option>
+                            {% for version in versions %}
+                                <option value="{{version}}">Version {{version}}</option>
+                            {% endfor %}
 						</select>
                 </div>
 

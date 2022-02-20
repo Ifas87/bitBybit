@@ -30,18 +30,25 @@
             </div>
         </div>
 
+        <!--
+            <form action="/versions/?data-status={{ value }}" method="post">
+                <label class="point">
+                    <div class="iamge"></div>
+                    <input name="retrieval" class="retrieval" value="{{ key }}" type="submit">{{ key }}
+                </label>
+            </form>
+        -->
+
         <div class="content">
             {% for key, value in dict_item.items() %}
                 {% if key.startswith('tEXt') %}
                     <div class="msgboxes"> {{ value }} </div>
                 {% else %}
                     <div class="msgboxes">
-                        <form action="/downloader/?data-status={{ value }}" method="post">
-                            <label class="point">
-                                <div class="iamge"></div>
-                                <input name="retrieval" class="retrieval" value="{{ key }}" type="submit">{{ key }}
-                            </label>
-                        </form>
+                        <a class="point" href="/versions/?data-status={{ value }}">
+                            <div class="iamge"></div>
+                            <input name="retrieval" class="retrieval" value="{{ key }}" type="submit">{{ key }}
+                        </a>
                     </div>
                 {% endif %}
             {% endfor %}
@@ -51,8 +58,10 @@
             <form enctype=multipart/form-data method="post" action="{{ url_for('chat') }}" id="mainform" class="dropzone" name="mainform">
                 <textarea class="msg_box" form="mainform" name="chatarea" placeholder="Message" maxlength = "500"></textarea>
                 <label class="custom-file-upload">
-                    <img src="{{ url_for('static', filename='images/paperclip.png') }}" height="50px" width="50px">
-                    <input name="files" type="file" class="files" multiple>
+                    
+                    <a href="{{ url_for('options') }}">
+                        <img src="{{ url_for('static', filename='images/paperclip.png') }}" height="50px" width="50px">
+                    </a>
                 </label>
                 <label class="custom-msg-submission">
                     <img src="{{ url_for('static', filename='images/send.png') }}" height="50px" width="50px">

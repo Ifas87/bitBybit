@@ -24,12 +24,10 @@ function doWork() {
 
                 else {
                     newval += `<div class="msgboxes">
-                    <form action="/downloader/?data-status=${value}" method="post">
-                        <label class="point">
+                    <a class="point" href="/versions/?data-status=${value}">
                             <div class="iamge"></div>
                             <input name="retrieval" class="retrieval" value="${index}" type="submit">${index}
-                        </label>
-                    </form>
+                    </a>
                 </div>`;
                 }
             });
@@ -45,3 +43,9 @@ function doWork() {
 }
 
 doWork();
+
+function redirection(event){
+    event.preventdefault();
+    console.log("Activated");
+    window.location.href("../");
+}

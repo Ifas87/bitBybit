@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module fritzingVersion="0.9.9b.2021-09-22.CD-348-0-f0af53a9" icon="Search.png" search="buzzer">
+    <title>Search</title>
+    <instances>
+        <instance moduleIdRef="SparkFun-Electromechanical-BUZZER-SMD3" modelIndex="7572" path="C:/Users/Safi/AppData/Local/Programs/Fritzing/fritzing-parts/core/sparkfun-electromechanical-buzzer-smd3.fzp" flippedSMD="true">
+            <views/>
+        </instance>
+        <instance moduleIdRef="RFID_USB_Reader-v14" modelIndex="7574" path="C:/Users/Safi/AppData/Local/Programs/Fritzing/fritzing-parts/core/RFID_USB_Reader-v14.fzp">
+            <views/>
+        </instance>
+        <instance moduleIdRef="SparkFun-Electromechanical-BUZZER-NS" modelIndex="7575" path="C:/Users/Safi/AppData/Local/Programs/Fritzing/fritzing-parts/core/sparkfun-electromechanical-buzzer-ns.fzp">
+            <views/>
+        </instance>
+        <instance moduleIdRef="SparkFun-Electromechanical-BUZZER-PTH" modelIndex="7577" path="C:/Users/Safi/AppData/Local/Programs/Fritzing/fritzing-parts/core/sparkfun-electromechanical-buzzer-pth.fzp">
+            <views/>
+        </instance>
+        <instance moduleIdRef="8abf6496b5d466c7a1893c17a296a676" modelIndex="7579" path="C:/Users/Safi/AppData/Local/Programs/Fritzing/fritzing-parts/core/piezo sensor.fzp">
+            <views/>
+        </instance>
+        <instance moduleIdRef="SparkFun-Electromechanical-BUZZER-SMD2-KIT" modelIndex="7580" path="C:/Users/Safi/AppData/Local/Programs/Fritzing/fritzing-parts/core/sparkfun-electromechanical-buzzer-smd2-kit.fzp" flippedSMD="true">
+            <views/>
+        </instance>
+        <instance moduleIdRef="SparkFun-Electromechanical-BUZZER-SMD" modelIndex="7582" path="C:/Users/Safi/AppData/Local/Programs/Fritzing/fritzing-parts/core/sparkfun-electromechanical-buzzer-smd.fzp" flippedSMD="true">
+            <views/>
+        </instance>
+        <instance moduleIdRef="LilyPad-slide-switch13" modelIndex="7584" path="C:/Users/Safi/AppData/Local/Programs/Fritzing/fritzing-parts/core/LilyPad-slide-switch13.fzp">
+            <views/>
+        </instance>
+        <instance moduleIdRef="Buzzer-v15" modelIndex="7585" path="C:/Users/Safi/AppData/Local/Programs/Fritzing/fritzing-parts/core/Buzzer-v15.fzp">
+            <views/>
+        </instance>
+        <instance moduleIdRef="SparkFun-Electromechanical-BUZZER-SMD2" modelIndex="7586" path="C:/Users/Safi/AppData/Local/Programs/Fritzing/fritzing-parts/core/sparkfun-electromechanical-buzzer-smd2.fzp" flippedSMD="true">
+            <views/>
+        </instance>
+        <instance moduleIdRef="SparkFun-Electromechanical-BUZZER-PTH-NS-KIT" modelIndex="7588" path="C:/Users/Safi/AppData/Local/Programs/Fritzing/fritzing-parts/core/sparkfun-electromechanical-buzzer-pth-ns-kit.fzp">
+            <views/>
+        </instance>
+        <instance moduleIdRef="ky_006_1" modelIndex="7590" path="C:/Users/Safi/AppData/Local/Programs/Fritzing/fritzing-parts/core/ky_006_1.fzp">
+            <views/>
+        </instance>
+    </instances>
+</module>
