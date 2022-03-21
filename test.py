@@ -13,4 +13,5 @@ def extract_file_number(f):
     s = re.findall("\d{1,3}",f)
     return (int(s[0]) if s else -1,f)
 
-print(max(lister,key=extract_file_number))
+#print(max(lister,key=extract_file_number))
+print(os.path.basename(PATH_chats))

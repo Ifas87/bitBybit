@@ -8,6 +8,7 @@ import tarfile
 import secrets
 import re
 from threading import Thread
+import shutil
 
 
 
@@ -23,6 +24,7 @@ app.config.update(
 )
 
 PATH_chats = app.config["UPLOADED_PATH"] + r"\chatrooms.txt"
+PATH_tempfiles = app.config["UPLOADED_PATH"] + r"\temp"
 ERR_pass = "Wrong passcode provided!"
 ERR_room = "No room by that name present!"
 ERR_word = "Room names are only one word long!"
@@ -38,6 +40,10 @@ def switchFiletoFolder(filename, olddelim, newdelim):
     else:
         real_type = filename
     return real_type
+
+
+def remover(complete_path):
+    pass
 
 
 def getVersion(filename):
@@ -222,30 +228,36 @@ def options():
     dir_contents = lister(customPath)
 
     if request.method == 'POST':
+        checks = request.form.get("switch")
+
         if request.files.getlist("files"):
             files = request.files.getlist("files")
             folder_name=""
-            for file in files:
-                folder_name = switchFiletoFolder(file.filename, ".", "-")
 
-                inner_dir_path = customPath + r"\\" + folder_name
-                
-                if folder_name in dir_contents:
-                    inner_dir_path_contents = lister(inner_dir_path)
+            if checks:
+                archive = tarfile.open(".tar.gz", "w|gz")
+            else:
+                for file in files:
+                    folder_name = switchFiletoFolder(file.filename, ".", "-")
 
-                    inner_dir_path_contents = [int(x.split(".")[0]) if "." in file.filename else int(x.split(".")) for x in inner_dir_path_contents]
-                    temp_version = str(max(inner_dir_path_contents)+1)
-
-                    file.save(os.path.join(app.config['UPLOADED_PATH'],
-                        (roomname+"/"+folder_name+"/"+ ( str(temp_version)+"."+(file.filename.split(".")[1] if "." in file.filename else file.filename)) ) ))
+                    inner_dir_path = customPath + r"\\" + folder_name
                     
-                    return redirect(url_for('chat'))
-                else:
-                    os.mkdir(inner_dir_path)
-                    file.save(os.path.join(app.config['UPLOADED_PATH'], 
-                        (roomname+"/"+folder_name+"/"+ ("1." +(file.filename.split(".")[1] if "." in file.filename else file.filename) ) )))
+                    if folder_name in dir_contents:
+                        inner_dir_path_contents = lister(inner_dir_path)
 
-                    return redirect(url_for('chat'))
+                        inner_dir_path_contents = [int(x.split(".")[0]) if "." in file.filename else int(x.split(".")) for x in inner_dir_path_contents]
+                        temp_version = str(max(inner_dir_path_contents)+1)
+
+                        file.save(os.path.join(app.config['UPLOADED_PATH'],
+                            (roomname+"/"+folder_name+"/"+ ( str(temp_version)+"."+(file.filename.split(".")[1] if "." in file.filename else file.filename)) ) ))
+                        
+                        return redirect(url_for('chat'))
+                    else:
+                        os.mkdir(inner_dir_path)
+                        file.save(os.path.join(app.config['UPLOADED_PATH'], 
+                            (roomname+"/"+folder_name+"/"+ ("1." +(file.filename.split(".")[1] if "." in file.filename else file.filename) ) )))
+
+                        return redirect(url_for('chat'))
 
     return render_template('options.html', template_folder='templates')
 
@@ -254,14 +266,16 @@ def options():
 @app.route('/versions/',methods=['POST','GET'])
 def versions():
     if request.method == 'POST':
-        folder_name = request.args.get('data-status')
+        folder_name = session["parent_directory"]
         filename = request.form.get("versions")
 
-        send_file(folder_name+"/"+filename)
-        return redirect(url_for('chat'))
+        original_name = os.path.basename(folder_name + "/" + switchFiletoFolder(os.path.basename(folder_name), "-", "."))
+        return send_file((folder_name+"/"+filename), as_attachment=True, download_name=original_name)
     
     folder_name = request.args.get('data-status')
+    session["parent_directory"] = folder_name
     result = lister(folder_name)
+
     return render_template('versions.html', template_folder='templates', versions = result)
 
 
@@ -283,19 +297,6 @@ def update():
         chat_content = {}
 
         if os.path.exists(customPath):
-            """
-            for file in os.listdir(customPath):
-                filename = os.fsdecode(file)
-                if filename.endswith(".txt"): 
-                    with open((customPath + "/" + filename), "r", encoding = 'utf-8') as f:
-                        data = f.read().replace('\n', ' ')
-                    chat_content[("tEXt"+str(keyCount))] = data
-                    keyCount+=1
-
-                else:
-                    chat_content[filename] = (customPath + "/" + filename)
-                    keyCount+=1
-            """
             for file in os.listdir(customPath):
                 filename = os.fsdecode(file)
                 if filename.startswith("tEXt"): 
@@ -325,5 +326,5 @@ def update():
 
 
 if __name__=='__main__':
-    app.run()
+    app.run(ssl_context=('cert.pem', 'key.pem'))
 

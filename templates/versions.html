@@ -21,7 +21,7 @@
         <div class="show_bg_2"></div>
         <div class="topbar">
             <ul>
-                <li><a href="{{ url_for('hello') }}" class="top_text">Home</a></li>
+                <li><a href="{{ url_for('chat') }}" class="top_text">Home</a></li>
             </ul>
         </div>
 
@@ -30,9 +30,9 @@
         <div class="buffer">
             <h1 class="title">bitBybit</h1>
         </div>
-
+        <!--{{ url_for('versions') }}-->
         <div class="formcontents">
-            <form action="{{ url_for('versions') }}" enctype="multipart/form-data" method="post" id="mainform" role="form">
+            <form action="/versions/?data-status={{ value }}" enctype="multipart/form-data" method="post" id="mainform" role="form">
                 <div class="buffer">
                     <label for="versions" class="labels">Link expiration time: </label>
 						<select name="versions" class="textlat">
@@ -46,6 +46,16 @@
                     <input name="enter_chat" class="redirect" type="submit" value="Download">
                 </div>
             </form>
+
+            <div class="notice">
+                {% with messages = get_flashed_messages() %}  
+                {% if messages %}  
+                    {% for message in messages %}  
+                    <p class="top_text err">{{ message }}</p>  
+                    {% endfor %}  
+                {% endif %}  
+                {% endwith %}  
+            </div>
         </div>
     </main>
 </body>

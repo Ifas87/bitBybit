@@ -110,9 +110,6 @@ ul {
     cursor: pointer;
 }
 
-.small{
-    font-size: 10px;
-}
 
 input[type='checkbox'] {
     -webkit-appearance:none;
@@ -173,6 +170,7 @@ input[type='checkbox']:checked {
 	letter-spacing:0;
 
     padding: 15px;
+	transition-duration: 0.5s;
 }
 
 .textboxes {
@@ -186,6 +184,7 @@ input[type='checkbox']:checked {
 
 	padding: 15px;
 	font-weight: 600;
+	transition-duration: 0.5s;
 }
 
 @media only screen and (max-width:920px){

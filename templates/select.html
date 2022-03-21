@@ -40,15 +40,15 @@
                 </div>
             </form>
 
-                <div class="notice">
-                    {% with messages = get_flashed_messages() %}  
-                    {% if messages %}  
-                        {% for message in messages %}  
-                        <p class="top_text err">{{ message }}</p>  
-                        {% endfor %}  
-                    {% endif %}  
-                    {% endwith %}  
-                </div>
+            <div class="notice">
+                {% with messages = get_flashed_messages() %}  
+                {% if messages %}  
+                    {% for message in messages %}  
+                    <p class="top_text err">{{ message }}</p>  
+                    {% endfor %}  
+                {% endif %}  
+                {% endwith %}  
+            </div>
         </div>
     </main>
 </body>

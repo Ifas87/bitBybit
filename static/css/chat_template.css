@@ -30,6 +30,24 @@ ul li {
     padding: 20px;
 }
 
+.imageLogo{
+	background-image: url("../images/Support.png");
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: cover;
+  
+	width: 150px;
+	height: 150px;
+
+    margin-left: -75px;
+  
+	overflow: hidden;
+	z-index: 2;
+  
+	transition-duration: 1s;
+    flex-grow: 1;
+}
+
 .top_text{
 	font-family: Montserrat;
 	font-size: 20px;
@@ -42,16 +60,12 @@ ul li {
 	transition-duration: 0.5s;
   
 	z-index: 2;
+    flex-grow: 1;
 }
 
 .subtitle {
 	color: #000;
-
-	position: absolute;
-	top: -20px;
-	left: 580px;
     
-
     font-family: Montserrat;
 	font-weight: 500;
 	font-size: 60px;
@@ -62,7 +76,7 @@ ul li {
 	z-index: 3;
     width: 350px;
 
-    flex-grow: 1;
+    flex-grow: 2;
 }
 
 .filler{
@@ -270,7 +284,7 @@ ul li {
         padding: 10px;
       
         z-index: 2;
-
+        flex-grow: 1;
     }
     
     .subtitle {
