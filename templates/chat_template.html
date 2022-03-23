@@ -18,34 +18,26 @@
 </head>
 <body>
     <main class="mega-flex">
-        <div class="show_bg"></div>
+        <div class="show_bg_2"></div>
 
-        </div class="filler">
+        <div class="filler">
             <div class="topbar">
                 <a href="{{ url_for('hello') }}" class="top_text">Home</a>
             </div>
+                
+            <div class="subtitle"> bitBybit/{{ var }} </div>
 
-            <div>
-                <h1 class="subtitle">bitBybit/{{ var }}</h1>
+            <div class="imageLogo">
+                <img src="{{ url_for('static', filename='images/Support.png') }}" height="100px" width="100px">
             </div>
-            <div class="imageLogo"></div>
         </div>
-
-        <!--
-            <form action="/versions/?data-status={{ value }}" method="post">
-                <label class="point">
-                    <div class="iamge"></div>
-                    <input name="retrieval" class="retrieval" value="{{ key }}" type="submit">{{ key }}
-                </label>
-            </form>
-        -->
 
         <div class="content">
             {% for key, value in dict_item.items() %}
                 {% if key.startswith('tEXt') %}
-                    <div class="msgboxes"> {{ value }} </div>
+                    <div class="msgboxes tri-right left-top"> {{ value }} </div>
                 {% else %}
-                    <div class="msgboxes">
+                    <div class="msgboxes tri-right left-top">
                         <a class="point" href="/versions/?data-status={{ value }}">
                             <div class="iamge"></div>
                             <input name="retrieval" class="retrieval" value="{{ key }}" type="submit">{{ key }}

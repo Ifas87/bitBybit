@@ -9,6 +9,7 @@ import secrets
 import re
 from threading import Thread
 import shutil
+from werkzeug.utils import secure_filename
 
 
 
@@ -24,7 +25,7 @@ app.config.update(
 )
 
 PATH_chats = app.config["UPLOADED_PATH"] + r"\chatrooms.txt"
-PATH_tempfiles = app.config["UPLOADED_PATH"] + r"\temp"
+PATH_tempfiles = app.config["UPLOADED_PATH"] + r"\tempZipFiles"
 ERR_pass = "Wrong passcode provided!"
 ERR_room = "No room by that name present!"
 ERR_word = "Room names are only one word long!"
@@ -46,6 +47,15 @@ def remover(complete_path):
     pass
 
 
+def lineExtractor(version, versionFile):
+    result = ""
+    with open(versionFile, "r") as f:
+        for line in f:
+            if (version in line):
+                result = line
+    return result
+
+
 def getVersion(filename):
     return os.path.splitext(filename)[0]
 
@@ -53,6 +63,16 @@ def getVersion(filename):
 def lister(dir_path):
     result = []
     for file in os.listdir(dir_path):
+        result.append(os.fsdecode(file))
+    
+    return result
+
+
+def lister2(dir_path):
+    result = []
+    for file in os.listdir(dir_path):
+        if os.path.isdir(os.path.join(dir_path, os.fsdecode(file))):
+            continue
         result.append(os.fsdecode(file))
     
     return result
@@ -194,13 +214,15 @@ def chat():
     
     for file in os.listdir(customPath):
         filename = os.fsdecode(file)
-        if filename.startswith("tEXt"): 
+        if filename.startswith("tEXt"):
+            #print("Text file: ", filename)
             with open((customPath + "/" + filename), "r", encoding = 'utf-8') as f:
                 data = f.read().replace('\n', ' ')
             chat_content[("tEXt"+str(keyCount))] = data
             keyCount+=1
 
-        if(os.path.isdir(customPath+"/"+filename)):
+        elif(os.path.isdir(customPath+"/"+filename)):
+            #print("Version control file: ", filename)
             inner_dir_path = customPath + r"\\" + filename
             inner_dir_path_contents = lister(inner_dir_path)
             
@@ -211,6 +233,7 @@ def chat():
             chat_content[real_filename+": Version "+getVersion(inner_latest_file)] = (inner_dir_path) 
 
         else:
+            #print("Standalone download file: ", filename)
             chat_content[filename] = (customPath + "/" + filename)
             keyCount+=1
         
@@ -222,6 +245,7 @@ def chat():
 def options():
     roomname = session["current_room"]
     customPath = r"" + app.config["UPLOADED_PATH"] + r"\\" + roomname
+    relativePath = "content/tempZipFiles"
     dir_contents = []
     inner_dir_path = r""
 
@@ -229,42 +253,90 @@ def options():
 
     if request.method == 'POST':
         checks = request.form.get("switch")
+        zipname = request.form.get("links")
 
         if request.files.getlist("files"):
             files = request.files.getlist("files")
             folder_name=""
 
             if checks:
-                archive = tarfile.open(".tar.gz", "w|gz")
+                if not os.path.isdir(PATH_tempfiles):
+                    os.mkdir(PATH_tempfiles)
+                with tarfile.open(os.path.join(customPath, secure_filename(zipname))+".tar.gz", "w:gz") as tar_handle:
+                    for file in files:
+                        if file:
+                            filename = secure_filename(file.filename)
+
+                            file.save(os.path.join(PATH_tempfiles, filename))
+                            print(relativePath)
+                            tar_handle.add(os.path.join(relativePath, filename))
+                            time.sleep(3)
+                            os.remove(os.path.join(PATH_tempfiles, filename))
+                return redirect(url_for('chat'))
+
             else:
                 for file in files:
                     folder_name = switchFiletoFolder(file.filename, ".", "-")
-
-                    inner_dir_path = customPath + r"\\" + folder_name
+                    inner_dir_path = os.path.join(customPath, folder_name)
+                    version_manager_path = os.path.join(inner_dir_path, "VersionInfo/VersionInfo.txt")
                     
-                    if folder_name in dir_contents:
-                        inner_dir_path_contents = lister(inner_dir_path)
+                    current_changes = request.form.get(file.filename+"textarea")
+                    print(file.filename, current_changes)
 
-                        inner_dir_path_contents = [int(x.split(".")[0]) if "." in file.filename else int(x.split(".")) for x in inner_dir_path_contents]
+                    if folder_name in dir_contents:
+                        inner_dir_path_contents = lister2(inner_dir_path)
+                        print(inner_dir_path_contents)
+                        temp_version = ""
+
+                        try:
+                            inner_dir_path_contents = [int(x.split(".")[0]) if "." in file.filename else int(x) for x in inner_dir_path_contents]
+                        except ValueError:
+                            print("Value Error anticipated")
+                        
+                        print(max(inner_dir_path_contents))
                         temp_version = str(max(inner_dir_path_contents)+1)
 
                         file.save(os.path.join(app.config['UPLOADED_PATH'],
                             (roomname+"/"+folder_name+"/"+ ( str(temp_version)+"."+(file.filename.split(".")[1] if "." in file.filename else file.filename)) ) ))
-                        
-                        return redirect(url_for('chat'))
+
+                        temp_strs = current_changes.replace("\n", " ") + "\n"
+
+                        print("Reached file reading part")
+                        with open(version_manager_path, 'a') as f:
+                            f.write("Version "+temp_version +": "+temp_strs)
+
                     else:
                         os.mkdir(inner_dir_path)
+                        os.mkdir(os.path.join(inner_dir_path, "VersionInfo"))
+                        inner_dir_path_contents = lister2(inner_dir_path)
+
                         file.save(os.path.join(app.config['UPLOADED_PATH'], 
                             (roomname+"/"+folder_name+"/"+ ("1." +(file.filename.split(".")[1] if "." in file.filename else file.filename) ) )))
 
-                        return redirect(url_for('chat'))
+                        try:
+                            inner_dir_path_contents = [int(x.split(".")[0]) if "." in file.filename else int(x) for x in inner_dir_path_contents]
+                        except ValueError:
+                            print("Value Error anticipated")
 
-    return render_template('options.html', template_folder='templates')
+                        temp_strs = current_changes.replace("\n", " ") + "\n"
 
+                        with open(version_manager_path, 'a') as f:
+                            f.write("Version 1: "+ temp_strs)
+                
+                return redirect(url_for('chat'))
+
+
+
+    reference = []
+    for file in os.listdir(customPath):
+        if os.path.isdir(os.path.join(customPath, os.fsdecode(file))):
+            reference.append( switchFiletoFolder(os.fsdecode(file), '-', '.') )
+    return render_template('options.html', template_folder='templates', reference=reference)
 
 
 @app.route('/versions/',methods=['POST','GET'])
 def versions():
+    versionContent = {}
     if request.method == 'POST':
         folder_name = session["parent_directory"]
         filename = request.form.get("versions")
@@ -274,17 +346,19 @@ def versions():
     
     folder_name = request.args.get('data-status')
     session["parent_directory"] = folder_name
-    result = lister(folder_name)
 
-    return render_template('versions.html', template_folder='templates', versions = result)
+    if(os.path.isdir(folder_name)):
+        temp = lister2(folder_name)
+        inner_dir_path_contents = [int(x.split(".")[0]) if "." in x else int(x) for x in temp]
 
+        for index in temp:
+            tempStr = "Version "+str(int(index.split(".")[0]) if "." in index else int(index))
+            versionContent[index] = lineExtractor(tempStr, (folder_name+"/"+"VersionInfo/VersionInfo.txt"))
 
-"""
-@app.route('/downloader/', methods=['POST', 'GET'])
-def retreive():
-    filename = request.args.get('data-status')
-    return send_file(filename)
-"""
+        return render_template('versions.html', template_folder='templates', versions = versionContent)
+    else:
+        return send_file(folder_name)
+
 
 
 
@@ -292,7 +366,7 @@ def retreive():
 def update():
     if request.method == 'POST':
         roomname = str(request.get_data()).split("/")[1]
-        customPath = r"" + app.config["UPLOADED_PATH"] + r"\\" + (str(roomname)[:-1])
+        customPath = r"" + app.config["UPLOADED_PATH"] + "/" + (str(roomname)[:-1]).strip()
         keyCount = 0
         chat_content = {}
 
@@ -305,7 +379,7 @@ def update():
                     chat_content[("tEXt"+str(keyCount))] = data
                     keyCount+=1
 
-                if(os.path.isdir(customPath+"/"+filename)):
+                elif(os.path.isdir(customPath+"/"+filename)):
                     inner_dir_path = customPath + r"\\" + filename
                     inner_dir_path_contents = lister(inner_dir_path)
                     
@@ -323,6 +397,8 @@ def update():
             chat_content["DELETED"] = "".format('"{}" timer has expired ', roomname)
 
         return json.dumps(chat_content)
+
+
 
 
 if __name__=='__main__':

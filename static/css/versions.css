@@ -27,6 +27,14 @@ ul {
     align-items: center;
 }
 
+.explanation{
+	font-family: Montserrat;
+	font-size: 15px;
+	font-weight: 600;
+
+	text-align: center;
+}
+
 #show_bg_2 {
 	position: absolute;
 	width: 100%;

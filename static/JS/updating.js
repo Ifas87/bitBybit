@@ -15,15 +15,15 @@ function doWork() {
         success: function(response){
             $.each(response, function( index, value ) {
                 if (index.startsWith('tEXt')){
-                    newval += `<div class="msgboxes"> ${value} </div>`;
+                    newval += `<div class="msgboxes tri-right left-top"> ${value} </div>`;
                 }
 
                 else if(index.startsWith('DEL')){
-                    newval += `<div class="msgboxes"> ${value} </div>`;
+                    newval += `<div class="msgboxes tri-right left-top"> ${value} </div>`;
                 }
 
                 else {
-                    newval += `<div class="msgboxes">
+                    newval += `<div class="msgboxes tri-right left-top">
                     <a class="point" href="/versions/?data-status=${value}">
                             <div class="iamge"></div>
                             <input name="retrieval" class="retrieval" value="${index}" type="submit">${index}

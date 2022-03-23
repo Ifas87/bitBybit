@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta id="my-data" data-name="fileList" data-other="{{ ', '.join(reference) }}">
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -15,7 +16,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
 
-    <script src="../static/JS/options.js" defer></script>
+    <!--<script src="../static/JS/options.js" defer></script>-->
     <script type="text/javascript" src="{{ url_for('static', filename='JS/options.js') }}" defer></script>
 </head>
 <body>
@@ -35,26 +36,27 @@
 
         <div class="formcontents">
             <form action="{{ url_for('options') }}" enctype="multipart/form-data" method="post" id="mainform" role="form">
-                <div class="buffer">
-                    <label for="files" class="labels">File upload: </label>
-                    <label class="custom-file-upload">
-                        <img src="{{ url_for('static', filename='images/paperclip.png') }}" height="50px" width="50px">
-                        <input name="files" type="file" class="files" multiple>
-                    </label>
+                <div class="wrapper">
+                    <div class="buffer">
+                        <label for="files" class="labels">File upload: </label>
+                        <label class="custom-file-upload">
+                            <img src="{{ url_for('static', filename='images/paperclip.png') }}" height="50px" width="50px">
+                            <input name="files" type="file" class="files" multiple>
+                        </label>
+                    </div>
+    
+                    <div class="buffer">
+                        <label class="labels">Compress as ZIP:</label>
+                        <input type="checkbox" id="switch" class="fileCompressionSwitch" name="switch">
+                    </div>
+    
+                    <div class="buffer">
+                        <label for="links" class="labels" id="nameLabel">Zip file Name: </label>
+                        <input name="links" class="textboxes" type="text" id="inputLabel" data-max-words="1" placeholder="Enter zipfile name" required>
+                    </div>
                 </div>
-
                 <div class="buffer">
-                    <label class="labels">Compress as ZIP:</label>
-                    <input type="checkbox" id="switch" name="switch">
-                </div>
-
-                <div class="buffer">
-                    <label for="links" class="labels" id="nameLabel">Name: </label>
-                    <input name="links" class="textboxes" type="text" id="inputLabel" data-max-words="1" placeholder="Enter room name" required>
-                </div>
-
-                <div class="buffer">
-                    <input name="enter_chat" class="redirect" type="submit" value="Join">
+                    <input name="enter_chat" class="redirect" type="submit" value="Upload">
                 </div>
             </form>
 
