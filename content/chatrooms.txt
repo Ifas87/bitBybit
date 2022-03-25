@@ -1,6 +1,2 @@
 placeholder : 123
-temp : 222
-
-demonstration : 777
-dms : 223
-dms : 223
+gameData : 123

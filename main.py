@@ -122,7 +122,7 @@ def create():
     if request.method == 'POST':
         room = request.form.get('links')
         passcode = request.form.get('passcodes')
-        duration = request.form.get('TTL')
+        duration = int(request.form.get('TTL'))
         allRoomNames = []
 
         with open(PATH_chats, encoding = 'utf-8') as f:
@@ -139,12 +139,13 @@ def create():
                 return redirect(url_for('create'))
             
             session["current_room"] = room
-            os.mkdir((app.config["UPLOADED_PATH"]+"/"+room))
+            if not (os.path.exists( os.path.join(app.config["UPLOADED_PATH"], room) )):
+                os.mkdir((app.config["UPLOADED_PATH"]+"/"+room))
             with open(PATH_chats, "a", encoding = 'utf-8') as f:
                 f.write("{} : {}\n".format(room, passcode))
             
             if(not(duration >= 20000)):
-                thread = Thread(target = timer, args = (10, room)) # !!!! Change this line in code to the value of the TTL dropdown box 
+                thread = Thread(target = timer, args = (duration, room)) # !!!! Change this line in code to the value of the TTL dropdown box 
                 thread.start()
             
             return redirect(url_for('chat'))
@@ -252,14 +253,17 @@ def options():
     dir_contents = lister(customPath)
 
     if request.method == 'POST':
-        checks = request.form.get("switch")
+        print("AJAX call is recieved")
+        checks = True if request.form.get("switch") == 'true' else False
         zipname = request.form.get("links")
 
-        if request.files.getlist("files"):
-            files = request.files.getlist("files")
+        print(checks)
+        print(request.files.getlist("filesInput"), len(request.files.getlist("filesInput")), bool(len(request.files.getlist("filesInput"))))
+        if len(request.files.getlist("filesInput")) > 1:
+            files = request.files.getlist("filesInput")
             folder_name=""
 
-            if checks:
+            if checks == True:
                 if not os.path.isdir(PATH_tempfiles):
                     os.mkdir(PATH_tempfiles)
                 with tarfile.open(os.path.join(customPath, secure_filename(zipname))+".tar.gz", "w:gz") as tar_handle:

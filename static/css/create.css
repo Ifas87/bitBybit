@@ -112,6 +112,10 @@ ul li {
     align-items: center;
 }
 
+.large_buffer{
+	margin-top: 50px;
+}
+
 .redirect {
 	height: 50px;
 	width: 200px;

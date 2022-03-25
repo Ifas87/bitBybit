@@ -10,6 +10,8 @@
     
     <link href="{{ url_for('static', filename='css/select.css') }}" rel="stylesheet" />
     <link href="../static/css/select.css" rel="stylesheet" type="text/css">
+
+    <title>Join Room</title>
 </head>
 <body>
     <main>
@@ -26,17 +28,19 @@
 
         <div class="center">
             <form action="{{ url_for('select') }}" enctype="multipart/form-data" method="post" id="mainform" role="form">
-                <div class="buffer">
-                    <label for="links" class="labels">Name: </label>
-                    <input name="links" class="textboxes" type="text" data-max-words="1" placeholder="Enter room name" required>
-                </div>
-                
-                <div class="buffer">
-                    <label for="passcodes" class="labels">Security pin: </label>
-                    <input name="passcodes" class="textboxes" type="text" data-max-words="1" placeholder="eg: 123"> 
-                </div>
-                <div class="buffer">
-                    <input name="enter_chat" class="redirect" type="submit" value="Join">
+                <div class="large_buffer">
+                    <div class="buffer">
+                        <label for="links" class="labels">Name: </label>
+                        <input name="links" class="textboxes" type="text" data-max-words="1" placeholder="Enter room name" required>
+                    </div>
+                    
+                    <div class="buffer">
+                        <label for="passcodes" class="labels">Security pin: </label>
+                        <input name="passcodes" class="textboxes" type="text" data-max-words="1" placeholder="eg: 123"> 
+                    </div>
+                    <div class="buffer">
+                        <input name="enter_chat" class="redirect" type="submit" value="Join">
+                    </div>
                 </div>
             </form>
 

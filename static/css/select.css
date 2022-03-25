@@ -105,6 +105,10 @@ ul li {
 	transition-duration: 1s;
 }
 
+.large_buffer{
+	margin-top: 50px;
+}
+
 .image:hover{
 	transform: rotate(5deg);
 	width: 160px;

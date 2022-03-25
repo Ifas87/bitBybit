@@ -1,0 +1,2 @@
+Version 1: Lobby page for the game.
+Version 2: Game page with grid.

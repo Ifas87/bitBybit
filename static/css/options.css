@@ -1,30 +1,12 @@
-.formcontents {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 550px;
-    height: 300px;
-    margin-top: -100px;
-    margin-left: -275px;
+.mainbox{
+	display: flex;
+	width: 70%;
+	height: 100%;
 
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-}
+	position: absolute;
+	left: 15%;
 
-ul {
-	list-style-type: none;
-}
-
-.buffer{
-    display: flex;
-    flex-direction: row;
-    width:auto;
-    margin: 10px;
-    padding: 10px;
-
-    justify-content: center;
-    align-items: center;
+	flex-direction: column;
 }
 
 #show_bg_2 {
@@ -36,14 +18,22 @@ ul {
   
 	z-index: 1;
 	background: radial-gradient(73.47% 73.47% at 50% 50%, #FFFFFF 29.17%, #f1f1f1 72.92%);
-  }
+}
 
-  .topbar{
-	position: absolute;
-	top: 10px;
-	left :0px;
-  
-	z-index: 2;
+.topbar{
+	z-index: 3;
+
+	margin: 20px;
+	padding: 10px;
+	width: 100%;
+
+	display: flex;
+	flex-direction: row;
+
+	align-items: center;
+	justify-content: center;
+
+	z-index: inherit;
 }
 
 .top_text{
@@ -51,13 +41,14 @@ ul {
 	font-size: 20px;
 	color: #000;
 	font-weight: 700;
-  
 	text-decoration: none;
-	list-style-type: none;
-	padding: 20px;
+  
+	padding: 10px;
 	transition-duration: 0.5s;
   
-	z-index: 2;
+	z-index: inherit;
+	flex-grow: 1;
+	align-items: center;
 }
 
 .title {
@@ -69,57 +60,131 @@ ul {
 	text-align: center;
 	
 	transition-duration: 0.5s;
-	z-index: 3;
+	z-index: inherit;
+	padding: 10px;
+
+	flex-grow: 2;
 }
+
 
 .image{
-	background-image: url("../images/Support.png");
-	background-repeat: no-repeat;
-	background-position: center center;
-	background-size: cover;
-  
-	position: absolute;
-	top: 20px;
-	left: 90%;
-  
-	width: 150px;
-	height: 150px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 
-    margin-left: -75px;
-  
-	overflow: hidden;
-	z-index: 2;
-  
+	z-index: inherit;
 	transition-duration: 1s;
+	flex-grow: 1;
+	align-items: center;
 }
 
+.interactableOptions{
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+}
 
-.files{
+.fileside{
+	display: flex;
+	flex-direction: column;
+	flex-grow: 3;
+
+	margin: 10px;
+}
+
+.generatedSide{
+	display: flex;
+	flex-direction: column;
+	flex-grow: 5;
+
+	justify-content: center;
+	align-items: center;
+
+	margin: 10px;
+}
+
+.formcontents {
+	/*
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 550px;
+    height: 300px;
+    margin-top: -100px;
+    margin-left: -275px;
+	*/
+
+    display: flex;
+    flex-direction: column;
+	margin: 10px;
+}
+
+.buffer{
+    display: flex;
+    flex-direction: row;
+    width:auto;
     padding: 10px;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.labels{
+	color: #000;
+	font-family:Montserrat;
+	font-weight: 600;
+	font-size:20px;
+	letter-spacing:0;
+
+    padding: 10px;
+	transition-duration: 0.5s;
+}
+
+.labels2{
+	color: #000;
+	font-family:Montserrat;
+	font-weight: 600;
+	font-size: 12px;
+	letter-spacing:0;
+
+    padding: 15px;
+	transition-duration: 0.5s;
+}
+
+.positioning{
+	position: relative;
+	width: 500px;
+}
+
+.filesInput{
     flex-grow: 1;
     display: none;
 
-    border-width: 5px;
+    border-width: 7px;
     border-color: #0F3F7D;
+	
+	width: 0;
+	height: 0;
+	opacity: 0;
 }
 
 .custom-file-upload {
     border-radius: 20px;
     border: 5px solid #0F3F7D;
-    display: inline-block;
-    padding: 8px;
+	margin: 15px;
+	padding: 10px;
     cursor: pointer;
 }
 
 .msg_box{
-    padding: 20px;
+    padding: 10px;
     flex-grow: 2;
 
     border-width: 0 0 10px;
     border-bottom-color: #0F3F7D;
 
-    width: 300px;
-    height: 50px;
+    width: 450px;
+    height: 70px;
 
     font-family: Montserrat;
 	font-weight: 500;
@@ -140,8 +205,8 @@ Checkbox additions
   
 	font: inherit;
 	color: currentColor;
-	width: 1.15em;
-	height: 1.15em;
+	width: 1.5em;
+	height: 1.5em;
 	border: 0.15em solid currentColor;
 	border-radius: 0.15em;
 	transform: translateY(-0.075em);
@@ -222,28 +287,6 @@ Checkbox additions
 	width: 300px;
 }
 
-.labels{
-	color: #000;
-	font-family:Montserrat;
-	font-weight: 600;
-	font-size:25px;
-	letter-spacing:0;
-
-    padding: 15px;
-	transition-duration: 0.5s;
-}
-
-.labels2{
-	color: #000;
-	font-family:Montserrat;
-	font-weight: 600;
-	font-size: 12px;
-	letter-spacing:0;
-
-    padding: 15px;
-	transition-duration: 0.5s;
-}
-
 .textboxes {
 	color: #000;
 
@@ -251,11 +294,20 @@ Checkbox additions
 	border-color:#1A73E8;
 
 	font-family:Montserrat;
-	font-size: 17px;
+	font-size: 15px;
 
-	padding: 15px;
+	padding: 10px;
 	font-weight: 600;
 	transition-duration: 0.5s;
+}
+
+.allFilelList{
+	font-family: Montserrat;
+	font-size: 15px;
+	font-weight: 600;
+
+	margin: 15px;
+	padding: 5px;
 }
 
 @media only screen and (max-width:920px){
